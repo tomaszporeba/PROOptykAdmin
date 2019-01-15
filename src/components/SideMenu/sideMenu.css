@@ -1,0 +1,34 @@
+.side-menu-container {
+    float: left;
+    background-color: purple;
+    height: 100vh;
+    -webkit-transition:width .05s linear;
+    transition:width .05s linear;
+    -webkit-transform:translateZ(0) scale(1,1);
+    z-index:1000;
+}
+
+.sidebar-open {
+    width: 300px !important;
+}
+
+.sidebar-closed {
+    width: 50px !important;
+}
+.top-image {
+    background-color: red;
+    height: 30%;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    height: 7%;
+    border-bottom: 1px solid white;
+
+}
+
+.menu-item span  {
+    height: auto;
+    padding-left: 30px;
+}
