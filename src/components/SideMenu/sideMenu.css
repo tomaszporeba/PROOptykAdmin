@@ -28,7 +28,15 @@
 
 }
 
+.menu-item i {
+    padding-left: 12px;
+}
+
 .menu-item span  {
     height: auto;
     padding-left: 30px;
+}
+
+.burger-icon {
+    padding-left: 12px;
 }

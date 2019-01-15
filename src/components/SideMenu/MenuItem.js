@@ -1,12 +1,15 @@
 import React from 'react';
+import {Link, NavLink} from 'react-router-dom';
 
 
-const MenuItem = ({title, icon}) => {
+const MenuItem = ({title, icon, isOpen, path}) => {
     return (
-        <div className="menu-item">
-            <i className="medium material-icons">{icon}</i>
-           <span>{title}</span>
-        </div>
+        <NavLink to={path} >
+            <div className="menu-item">
+                <i className="medium material-icons">{icon}</i>
+                {isOpen ? <span>{title}</span> : ''}
+            </div>
+        </NavLink>
     );
 };
 
