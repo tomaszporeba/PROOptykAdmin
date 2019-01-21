@@ -1,5 +1,5 @@
 .dashboard {
-    height: 100vh;
+    height: calc(100vh - 56px);
     background-color: #1e1e1e;
     display: flex;
     justify-content: center;

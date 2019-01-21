@@ -1,4 +1,5 @@
 .side-menu-container {
+    box-shadow: none;
     float: left;
     background-color: purple;
     height: 100vh;
@@ -7,6 +8,7 @@
     -webkit-transform:translateZ(0) scale(1,1);
     z-index:1000;
 }
+
 
 .sidebar-open {
     width: 300px !important;

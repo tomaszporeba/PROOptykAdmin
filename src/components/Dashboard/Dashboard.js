@@ -1,6 +1,7 @@
 import React from 'react';
 import './dashboard.css'
 import SideMenu from '../SideMenu/SideMenu'
+import Header from '../Header/Header';
 
 
 class Dashboard extends React.Component {
@@ -17,6 +18,7 @@ class Dashboard extends React.Component {
         return (
             <div>
                 <SideMenu isOpen={this.state.sidebarOpen} toggleSidebar={this.handleViewSidebar}/>
+                <Header/>
             </div>
         );
     }

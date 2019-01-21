@@ -1,0 +1,11 @@
+.header-container {
+    width: 100%;
+    background-color: purple;
+    height: 56px;
+    text-align: right;
+}
+
+.header-container span {
+    font-size: large;
+    font-weight: bold;
+}

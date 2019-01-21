@@ -1,11 +1,17 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import '../Dashboard/dashboard.css'
+import {getEyeglasses} from "../../actions";
 
 class EyeglassList extends React.Component {
     constructor(props) {
         super(props);
+    }
 
+
+    async componentDidMount() {
+        let eyeglasses = await getEyeglasses("aa");
+        console.log(eyeglasses);
     }
 
     render() {
@@ -24,5 +30,6 @@ class EyeglassList extends React.Component {
         );
     }
 }
+
 
 export default EyeglassList;
