@@ -1,14 +1,10 @@
 .side-menu-container {
-    box-shadow: none;
-    float: left;
-    background-color: purple;
-    height: 100vh;
-    -webkit-transition:width .05s linear;
-    transition:width .05s linear;
+    background-color: #2c3034;
+    -webkit-transition:width .07s linear;
+    transition:width .07s linear;
     -webkit-transform:translateZ(0) scale(1,1);
-    z-index:1000;
+    flex: 1;
 }
-
 
 .sidebar-open {
     width: 300px !important;
@@ -27,7 +23,6 @@
     align-items: center;
     height: 7%;
     border-bottom: 1px solid white;
-
 }
 
 .menu-item i {
@@ -37,8 +32,4 @@
 .menu-item span  {
     height: auto;
     padding-left: 30px;
-}
-
-.burger-icon {
-    padding-left: 12px;
 }

@@ -7,7 +7,7 @@ import Header from '../Header/Header';
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { sidebarOpen: false };
+        this.state = {sidebarOpen: false};
     }
 
     handleViewSidebar = () => {
@@ -16,10 +16,7 @@ class Dashboard extends React.Component {
 
     render() {
         return (
-            <div>
-                <SideMenu isOpen={this.state.sidebarOpen} toggleSidebar={this.handleViewSidebar}/>
-                <Header/>
-            </div>
+            null
         );
     }
 }

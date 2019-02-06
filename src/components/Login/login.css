@@ -60,8 +60,7 @@
 
 .login-button {
     border-radius: 100%;
-    border-color: #1e1e1e;
-    border-width: 3px;
+    border: 3px #1e1e1e;
 }
 .line {
     position: absolute;

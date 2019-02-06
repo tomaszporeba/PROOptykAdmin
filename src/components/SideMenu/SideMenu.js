@@ -2,6 +2,7 @@ import React from 'react';
 import './sideMenu.css'
 import MenuItem from './MenuItem';
 
+
 const MENU_FIELDS = [
     {title: "Dashboard", icon: "home", path: "/"},
     {title: "Eyeglasses", icon: "remove_red_eye", path: "eyeglass"},
@@ -14,7 +15,6 @@ const SideMenu = ({isOpen, toggleSidebar}) => {
     let sidebarClass = isOpen ? 'sidebar-open side-menu-container' : 'sidebar-closed side-menu-container';
     return (
         <nav className={sidebarClass}>
-            <i onClick={toggleSidebar} className="medium material-icons burger-icon">menu</i>
             <div className="top-image">
             </div>
             {MENU_FIELDS.map(field => (

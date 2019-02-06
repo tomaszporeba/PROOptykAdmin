@@ -7,8 +7,19 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import EyeglassList from "./components/Eyeglasses/EyeglassList";
 import PrivateRoute from "./PrivateRoute";
 import Login from "./components/Login/Login";
+import './components/Dashboard/dashboard.css'
+import SideMenu from './components/SideMenu/SideMenu'
+import Header from './components/Header/Header';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {sidebarOpen: false};
+    }
+
+    handleViewSidebar = () => {
+        this.setState({sidebarOpen: !this.state.sidebarOpen})
+    };
 
     render() {
         return (
@@ -16,8 +27,17 @@ class App extends Component {
                 <div>
                     <Route exact path="/" component={Dashboard}/>
                     <Route exact path="/login" component={Login}/>
-                    <PrivateRoute path="/dashboard/" component={Dashboard}/>
-                    <PrivateRoute exact path="/dashboard/eyeglass" component={EyeglassList}/>
+                    <div className="dashboard-container">
+                        <div className="dashboard">
+                            <Header toggleSidebar={this.handleViewSidebar}/>
+                            <div className="main-container">
+                                <SideMenu isOpen={this.state.sidebarOpen} />
+                                <PrivateRoute exact path="/dashboard" component={Dashboard}/>
+                                <PrivateRoute exact path="/eyeglass" component={EyeglassList}/>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </BrowserRouter>
         );

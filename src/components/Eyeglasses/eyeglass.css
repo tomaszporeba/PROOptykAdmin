@@ -1,0 +1,40 @@
+.eyeglass-container {
+    flex-grow: 1;
+    background-color: #202428;
+}
+
+.eyeglass-list-container {
+    height: calc(100vh - 56px);
+    display: flex;
+    flex-flow: column;
+
+}
+.eyeglass-list-container {
+    justify-content: center;
+    align-items: center;
+}
+
+.eyeglass-list-container span {
+    padding-left: 25px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: white;
+    align-self: flex-start;
+}
+
+.eyeglass-list {
+    -webkit-box-shadow: inset 0px 0px 35px 5px rgba(255,255,255,0.1);
+    -moz-box-shadow: inset 0px 0px 35px 5px rgba(255,255,255,0.1);
+    box-shadow: inset 0px 0px 35px 5px rgba(255,255,255,0.1);
+    width: calc(100% - 50px);
+    height: calc(100% - 160px);
+    background-color: #2c3034;
+}
+
+.eyeglass-container span {
+
+}
+
+.eyeglass-list-header {
+
+}
