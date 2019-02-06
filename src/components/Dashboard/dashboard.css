@@ -4,11 +4,11 @@
     width: 70vw;
     background-color: white;
     flex-direction: column;
+
 }
 
 .main-container {
     display: flex;
-    flex-direction: column;
     flex: 1;
 }
 

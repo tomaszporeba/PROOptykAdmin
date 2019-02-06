@@ -1,10 +1,11 @@
 .eyeglass-container {
-    flex-grow: 1;
     background-color: #202428;
+    flex-grow: 1;
 }
 
 .eyeglass-list-container {
-    height: calc(100vh - 56px);
+    height: 100%;
+    /*height: calc(100vh - 56px);*/
     display: flex;
     flex-flow: column;
 
