@@ -9,14 +9,13 @@ export const fetchUser = (values, history) => async dispatch => {
     console.log(res.status + " code");
     if (res.status <300 && res.status>=200) {
         dispatch({type: FETCH_USER, token: res.data.token, user: res.data});
-        history.push("/dashboard/")
+        history.push("/")
     }
 
 };
 
-export const getEyeglasses = (values) => async dispatch => {
+export const getEyeglasses = () => async dispatch => {
     dispatch({type: GET_EYEGLASS});
-    console.log("weszlo");
     const res = await axios.get("http://localhost:8000/api/eyeglass");
     console.log(res.data);
     return res.data;

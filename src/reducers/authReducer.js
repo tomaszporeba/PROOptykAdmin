@@ -8,11 +8,11 @@ export default function (state = null, action) {
             localStorage.setItem('USER', JSON.stringify(action.user));
             return localStorage.getItem('TOKEN') || false;
         case POST_EYEGLASS:
-            console.log("token in authReduces " + localStorage.getItem('TOKEN') );
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('TOKEN');
+            axios.defaults.headers.common['Authorization'] = localStorage.getItem('TOKEN');
             return "ok";
         case GET_EYEGLASS:
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('TOKEN');
+            axios.defaults.headers.common['Authorization'] = localStorage.getItem('TOKEN');
+            return "ok";
         case AUTHENTICATED:
             return {...state, authenticated:true};
         case UNAUTHENTICATED:
