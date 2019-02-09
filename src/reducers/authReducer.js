@@ -1,4 +1,4 @@
-import {AUTHENTICATED, AUTHENTICATION_ERROR, FETCH_USER, POST_EYEGLASS, UNAUTHENTICATED, GET_EYEGLASS} from "../actions/types";
+import {FETCH_USER, AUTHENTICATED_REQUEST} from "../actions/types";
 import axios from 'axios';
 
 export default function (state = null, action) {
@@ -6,19 +6,10 @@ export default function (state = null, action) {
         case FETCH_USER:
             localStorage.setItem('TOKEN', action.token);
             localStorage.setItem('USER', JSON.stringify(action.user));
-            return localStorage.getItem('TOKEN') || false;
-        case POST_EYEGLASS:
+            return { token : localStorage.getItem('TOKEN') || false};
+        case AUTHENTICATED_REQUEST:
             axios.defaults.headers.common['Authorization'] = localStorage.getItem('TOKEN');
-            return "ok";
-        case GET_EYEGLASS:
-            axios.defaults.headers.common['Authorization'] = localStorage.getItem('TOKEN');
-            return "ok";
-        case AUTHENTICATED:
-            return {...state, authenticated:true};
-        case UNAUTHENTICATED:
-            return {...state, authenticated:false};
-        case AUTHENTICATION_ERROR:
-            return {...state, error: action.payload};
+            return state;
         default:
             return state;
     }
