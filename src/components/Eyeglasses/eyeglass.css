@@ -59,6 +59,15 @@
     justify-content: space-between;
 }
 
+.table-container  thead>tr {
+    background-color: #092756;
+    cursor: pointer;
+}
+.table-container tbody>tr:hover {
+    background-color: #61dafb;
+}
+
+
 .table-container th, td {
     flex-grow: 1;
     flex-basis: 0;

@@ -22,20 +22,10 @@ const logAction = store => {
             return result;
         }
     }
-}
+};
 
 const store = createStore(reducers, startState, applyMiddleware(reduxThunk, logAction));
 
-// function setAuthState(state) {
-//     try {
-//         localStorage.setItem('TOKEN', JSON.stringify((state.token || {})));
-//         localStorage.setItem('USER', JSON.stringify((state.user || {})));
-//     } catch (err) { return undefined; }
-// }
-//
-// store.subscribe(() => {
-//     setAuthState(store.getState())
-// });
 
 ReactDOM.render(
     <Provider store={store}><App/></Provider>,
