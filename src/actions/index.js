@@ -12,9 +12,9 @@ export const fetchUser = (values, history) => async dispatch => {
     }
 };
 
-export const getEyeglasses = () => async dispatch => {
+export const getEyeglasses = (param) => async dispatch => {
     dispatch({type: AUTHENTICATED_REQUEST});
-    const res = await axios.get("http://localhost:8000/api/eyeglass");
+    const res = await axios.get("http://localhost:8000/api/eyeglass", {params:{search: param}});
     return res.data;
 };
 

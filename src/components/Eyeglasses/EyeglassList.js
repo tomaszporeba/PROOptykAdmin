@@ -32,7 +32,8 @@ class EyeglassList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            eyeglasses: []
+            eyeglasses: [],
+            param: ''
         }
     }
 
@@ -72,6 +73,15 @@ class EyeglassList extends React.Component {
             })
         )
     }
+    async handleChange(event) {
+        let eyeglasses;
+        this.setState({param: event.target.value}, async () => {
+            eyeglasses = await this.props.getEyeglasses(this.state.param);
+            this.setState({
+                eyeglasses
+            })
+        });
+    }
 
     render() {
         return (
@@ -79,6 +89,9 @@ class EyeglassList extends React.Component {
                 <div className="eyeglass-list-container">
                     <span>Eyeglass</span>
                     <div className="eyeglass-list">
+                        <div className="search-container">
+                            <input placeholder="Search..." type="text" name="param" value={this.state.param} onChange={(event) => this.handleChange(event)}/>
+                        </div>
                         <table className="table-container">
                             <thead>
                             <tr>
