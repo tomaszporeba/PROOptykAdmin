@@ -6,14 +6,27 @@ import {connect} from "react-redux";
 
 
 const columns = [
-    {title: "Holder name", width: 2},
-    {title: "Purchase price", width: 2},
-    {title: "Price", width: 2},
-    {title: "Vat", width: 2},
-    {title: "Availability", width: 2},
-    {title: "Color", width: 2},
-    {title: "Size", width: 2},
-    {title: "Salon", width: 2}];
+    {title: "Holder name", width: 2, sortKeyValue: "holder_name"},
+    {title: "Purchase price", width: 2, sortKeyValue: "purchase_price"},
+    {title: "Price", width: 2, sortKeyValue: "price"},
+    {title: "Vat", width: 2, sortKeyValue: "vat"},
+    {title: "Availability", width: 2, sortKeyValue: "availability"},
+    {title: "Color", width: 2, sortKeyValue: "color"},
+    {title: "Size", width: 2, sortKeyValue: "size"},
+    {title: "Salon", width: 2, sortKeyValue: "salon"}];
+
+const Row =({holder_name, purchase_price, price, vat, availability, color, size, salon}) => (
+    <tr>
+        <td>{holder_name}</td>
+        <td>{purchase_price}</td>
+        <td>{price}</td>
+        <td>{vat}</td>
+        <td>{availability}</td>
+        <td>{color}</td>
+        <td>{size}</td>
+        <td>{salon}</td>
+    </tr>
+);
 
 class EyeglassList extends React.Component {
     constructor(props) {
@@ -30,10 +43,20 @@ class EyeglassList extends React.Component {
         })
     }
 
+    sortArray(keyValue) {
+        let isDescending;
+        isDescending = this.state.eyeglasses[0][keyValue] >= this.state.eyeglasses.slice(-1).pop()[keyValue];
+        isDescending ?  this.setState({
+            eyeglasses: this.state.eyeglasses.sort((a,b) => (a[keyValue] > b[keyValue]) ? 1 : ((b[keyValue] > a[keyValue]) ? -1 : 0))
+        }) :         this.setState({
+            eyeglasses: this.state.eyeglasses.sort((a,b) => (a[keyValue] < b[keyValue]) ? 1 : ((b[keyValue] < a[keyValue]) ? -1 : 0))
+        })
+
+    }
     renderHeader() {
         return (columns.map((column) => {
-                return (
-                    <th>
+                return(
+                    <th onClick={() => this.sortArray(column.sortKeyValue)}>
                         {column.title}
                     </th>
                 )
@@ -44,21 +67,11 @@ class EyeglassList extends React.Component {
     renderRows() {
         return (this.state.eyeglasses.map((eyeglass) => {
                 return (
-                    <tr>
-                        <td>{eyeglass.holder_name}</td>
-                        <td>{eyeglass.purchase_price}</td>
-                        <td>{eyeglass.price}</td>
-                        <td>{eyeglass.vat}</td>
-                        <td>{eyeglass.availability}</td>
-                        <td>{eyeglass.color}</td>
-                        <td>{eyeglass.size}</td>
-                        <td>{eyeglass.salon}</td>
-                    </tr>
+                    <Row {...eyeglass}/>
                 )
             })
         )
     }
-
 
     render() {
         return (

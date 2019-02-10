@@ -49,6 +49,7 @@
     background-color: green;
     display: flex;
     flex: 0 0 50px;
+
 }
 
 .table-container tr {
@@ -57,11 +58,11 @@
     flex-grow: 1;
     background-color: blueviolet;
     justify-content: space-between;
+
 }
 
 .table-container  thead>tr {
     background-color: #092756;
-    cursor: pointer;
 }
 .table-container tbody>tr:hover {
     background-color: #61dafb;
@@ -73,4 +74,21 @@
     flex-basis: 0;
     display: flex;
     justify-content: flex-start;
+}
+.table-container th {
+    cursor: pointer;
+}
+
+.table-container th:last-of-type, th:first-of-type {
+    flex-grow: 2;
+    word-wrap: break-word;
+}
+
+.table-container td:last-of-type, td:first-of-type{
+    flex-grow: 2;
+    word-wrap: break-word;
+    overflow: auto;
+}
+.table-container tr:nth-child(2) {
+    background-color: green;
 }

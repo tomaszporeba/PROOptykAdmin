@@ -15,7 +15,6 @@ export const fetchUser = (values, history) => async dispatch => {
 export const getEyeglasses = () => async dispatch => {
     dispatch({type: AUTHENTICATED_REQUEST});
     const res = await axios.get("http://localhost:8000/api/eyeglass");
-    console.log(res.data);
     return res.data;
 };
 
