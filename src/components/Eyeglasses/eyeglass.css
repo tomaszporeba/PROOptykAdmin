@@ -45,7 +45,7 @@
 
 .table-container {
     display: flex;
-    width: calc(100% - 50px);
+    flex: 1 0;
     height: calc(100% - 50px);
     background-color: #fb0012;
     flex-direction: column;

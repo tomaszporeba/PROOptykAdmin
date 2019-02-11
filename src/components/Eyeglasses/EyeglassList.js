@@ -3,6 +3,7 @@ import {Link, withRouter} from 'react-router-dom';
 import './eyeglass.css'
 import {fetchUser, getEyeglasses} from "../../actions";
 import {connect} from "react-redux";
+import _ from 'lodash';
 
 
 const columns = [
@@ -52,7 +53,14 @@ class EyeglassList extends React.Component {
         }) :         this.setState({
             eyeglasses: this.state.eyeglasses.sort((a,b) => (a[keyValue] < b[keyValue]) ? 1 : ((b[keyValue] < a[keyValue]) ? -1 : 0))
         })
+    }
 
+    debounceEvent(...args) {
+        this.debouncedEvent = _.debounce(...args);
+        return e => {
+            e.persist();
+            return this.debouncedEvent(e);
+        }
     }
     renderHeader() {
         return (columns.map((column) => {
@@ -73,15 +81,16 @@ class EyeglassList extends React.Component {
             })
         )
     }
-    async handleChange(event) {
+
+    handleChange = (e) => {
         let eyeglasses;
-        this.setState({param: event.target.value}, async () => {
+        this.setState({param: e.target.value}, async () => {
             eyeglasses = await this.props.getEyeglasses(this.state.param);
             this.setState({
                 eyeglasses
             })
         });
-    }
+    };
 
     render() {
         return (
@@ -90,7 +99,7 @@ class EyeglassList extends React.Component {
                     <span>Eyeglass</span>
                     <div className="eyeglass-list">
                         <div className="search-container">
-                            <input placeholder="Search..." type="text" name="param" value={this.state.param} onChange={(event) => this.handleChange(event)}/>
+                            <input placeholder="Search..." type="text" name="param"  onChange={this.debounceEvent(this.handleChange, 500)}/>
                         </div>
                         <table className="table-container">
                             <thead>
