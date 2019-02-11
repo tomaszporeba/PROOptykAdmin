@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {Link, withRouter} from 'react-router-dom';
+import React from 'react';
+import {Link} from 'react-router-dom';
 import './eyeglass.css'
-import {fetchUser, getEyeglasses} from "../../actions";
+import { getEyeglasses} from "../../actions";
 import {connect} from "react-redux";
 import _ from 'lodash';
 
@@ -22,7 +22,7 @@ const Row = (...eyeglass) => {
     for (let key in eyeglass[0]) {
         if (eyeglass[0].hasOwnProperty(key)) {
             if (!omitted.includes(key)) {
-                rows.push(<td>{eyeglass[0][key]}</td>)
+                rows.push(<td key={eyeglass[0][key]}>{eyeglass[0][key]}</td>)
             }
         }
     }
@@ -67,7 +67,7 @@ class EyeglassList extends React.Component {
     renderHeader() {
         return (columns.map((column) => {
                 return (
-                    <th onClick={() => this.sortArray(column.sortKeyValue)}>
+                    <th key={column.title} onClick={() => this.sortArray(column.sortKeyValue)}>
                         {column.title}
                     </th>
                 )
@@ -78,7 +78,7 @@ class EyeglassList extends React.Component {
     renderRows() {
         return (this.state.eyeglasses.map((eyeglass) => {
                 return (
-                    <Row {...eyeglass}/>
+                    <Row key={eyeglass.id}{...eyeglass}/>
                 )
             })
         )

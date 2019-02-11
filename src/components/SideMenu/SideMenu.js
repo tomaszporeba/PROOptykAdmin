@@ -18,7 +18,7 @@ const SideMenu = ({isOpen, toggleSidebar}) => {
             <div className="top-image">
             </div>
             {MENU_FIELDS.map(field => (
-                <MenuItem isOpen={isOpen} title={field.title} icon={field.icon} path={field.path}/>
+                <MenuItem key={field.title} isOpen={isOpen} title={field.title} icon={field.icon} path={field.path}/>
                 )
             )}
         </nav>

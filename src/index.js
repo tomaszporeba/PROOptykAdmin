@@ -8,7 +8,6 @@ import {createStore, applyMiddleware} from 'redux';
 import reduxThunk from 'redux-thunk';
 import 'materialize-css/dist/css/materialize.min.css';
 import reducers from './reducers';
-import requestMiddleware from "./middlewares/requestMiddleware";
 
 const startState = {
     auth: localStorage.getItem('TOKEN')

@@ -20,7 +20,7 @@ export const getEyeglasses = (param) => async dispatch => {
 
 export const saveEyeglass = (values, history) => async dispatch => {
     dispatch({type: AUTHENTICATED_REQUEST});
-    const res = await axios.post("http://localhost:8080/eyeglasses/add",
+    await axios.post("http://localhost:8080/eyeglasses/add",
     values
     );
     history.push("/eyeglass")

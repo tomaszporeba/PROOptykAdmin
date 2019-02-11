@@ -1,7 +1,5 @@
 import React from 'react';
 import './dashboard.css'
-import SideMenu from '../SideMenu/SideMenu'
-import Header from '../Header/Header';
 
 
 class Dashboard extends React.Component {
