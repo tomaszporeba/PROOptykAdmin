@@ -16,18 +16,19 @@ const columns = [
     {title: "Size", width: 2, sortKeyValue: "size"},
     {title: "Salon", width: 2, sortKeyValue: "salon"}];
 
-const Row =({holder_name, purchase_price, price, vat, availability, color, size, salon}) => (
-    <tr>
-        <td>{holder_name}</td>
-        <td>{purchase_price}</td>
-        <td>{price}</td>
-        <td>{vat}</td>
-        <td>{availability}</td>
-        <td>{color}</td>
-        <td>{size}</td>
-        <td>{salon}</td>
-    </tr>
-);
+const Row = (...eyeglass) => {
+    let rows = [];
+    let omitted = ['createdAt', 'updatedAt', 'id'];
+    for (let key in eyeglass[0]) {
+        if (eyeglass[0].hasOwnProperty(key)) {
+            if (!omitted.includes(key)) {
+                rows.push(<td>{eyeglass[0][key]}</td>)
+            }
+        }
+    }
+    return (<tr>{rows}</tr>);
+};
+
 
 class EyeglassList extends React.Component {
     constructor(props) {
@@ -48,10 +49,10 @@ class EyeglassList extends React.Component {
     sortArray(keyValue) {
         let isDescending;
         isDescending = this.state.eyeglasses[0][keyValue] >= this.state.eyeglasses.slice(-1).pop()[keyValue];
-        isDescending ?  this.setState({
-            eyeglasses: this.state.eyeglasses.sort((a,b) => (a[keyValue] > b[keyValue]) ? 1 : ((b[keyValue] > a[keyValue]) ? -1 : 0))
-        }) :         this.setState({
-            eyeglasses: this.state.eyeglasses.sort((a,b) => (a[keyValue] < b[keyValue]) ? 1 : ((b[keyValue] < a[keyValue]) ? -1 : 0))
+        isDescending ? this.setState({
+            eyeglasses: this.state.eyeglasses.sort((a, b) => (a[keyValue] > b[keyValue]) ? 1 : ((b[keyValue] > a[keyValue]) ? -1 : 0))
+        }) : this.setState({
+            eyeglasses: this.state.eyeglasses.sort((a, b) => (a[keyValue] < b[keyValue]) ? 1 : ((b[keyValue] < a[keyValue]) ? -1 : 0))
         })
     }
 
@@ -62,9 +63,10 @@ class EyeglassList extends React.Component {
             return this.debouncedEvent(e);
         }
     }
+
     renderHeader() {
         return (columns.map((column) => {
-                return(
+                return (
                     <th onClick={() => this.sortArray(column.sortKeyValue)}>
                         {column.title}
                     </th>
@@ -99,7 +101,8 @@ class EyeglassList extends React.Component {
                     <span>Eyeglass</span>
                     <div className="eyeglass-list">
                         <div className="search-container">
-                            <input placeholder="Search..." type="text" name="param"  onChange={this.debounceEvent(this.handleChange, 500)}/>
+                            <input placeholder="Search..." type="text" name="param"
+                                   onChange={this.debounceEvent(this.handleChange, 700)}/>
                         </div>
                         <table className="table-container">
                             <thead>
@@ -108,7 +111,9 @@ class EyeglassList extends React.Component {
                             </tr>
                             </thead>
                             <tbody>
-                                {this.renderRows()}
+
+                            {this.renderRows()}
+
                             </tbody>
                         </table>
                         <div className="fixed-action-btn">
