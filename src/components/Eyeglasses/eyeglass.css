@@ -1,21 +1,21 @@
-.eyeglass-container {
+.list-container {
     background-color: #202428;
     flex-grow: 1;
 }
 
-.eyeglass-list-container {
+.list-items-container {
     height: 100%;
     /*height: calc(100vh - 56px);*/
     display: flex;
     flex-flow: column;
 
 }
-.eyeglass-list-container {
+.list-items-container {
     justify-content: center;
     align-items: center;
 }
 
-.eyeglass-list-container span {
+.list-items-container span {
     padding-left: 25px;
     margin-bottom: 5px;
     font-size: 20px;
@@ -23,7 +23,7 @@
     align-self: flex-start;
 }
 
-.eyeglass-list {
+.list-items {
     -webkit-box-shadow: inset 0 0 35px 5px rgba(255,255,255,0.1);
     -moz-box-shadow: inset 0 0 35px 5px rgba(255,255,255,0.1);
     box-shadow: inset 0 0 35px 5px rgba(255,255,255,0.1);
@@ -37,7 +37,7 @@
     overflow: auto;
 }
 
-.eyeglass-list input {
+.list-items input {
     width: 100px!important;
     flex: 0 0 10px;
 }

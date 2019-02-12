@@ -16,13 +16,13 @@ const columns = [
     {title: "Size", width: 2, sortKeyValue: "size"},
     {title: "Salon", width: 2, sortKeyValue: "salon"}];
 
-const Row = (...eyeglass) => {
+const Row = (...listItems) => {
     let rows = [];
     let omitted = ['createdAt', 'updatedAt', 'id'];
-    for (let key in eyeglass[0]) {
-        if (eyeglass[0].hasOwnProperty(key)) {
+    for (let key in listItems[0]) {
+        if (listItems[0].hasOwnProperty(key)) {
             if (!omitted.includes(key)) {
-                rows.push(<td key={eyeglass[0][key]}>{eyeglass[0][key]}</td>)
+                rows.push(<td key={listItems[0][key]}>{listItems[0][key]}</td>)
             }
         }
     }
@@ -30,29 +30,29 @@ const Row = (...eyeglass) => {
 };
 
 
-class EyeglassList extends React.Component {
+class List extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            eyeglasses: [],
+            listItems: [],
             param: ''
         }
     }
 
     async componentDidMount() {
-        let eyeglasses = await this.props.getEyeglasses();
+        let listItems = await this.props.getEyeglasses();
         this.setState({
-            eyeglasses
+            listItems
         })
     }
 
     sortArray(keyValue) {
         let isDescending;
-        isDescending = this.state.eyeglasses[0][keyValue] >= this.state.eyeglasses.slice(-1).pop()[keyValue];
+        isDescending = this.state.listItems[0][keyValue] >= this.state.listItems.slice(-1).pop()[keyValue];
         isDescending ? this.setState({
-            eyeglasses: this.state.eyeglasses.sort((a, b) => (a[keyValue] > b[keyValue]) ? 1 : ((b[keyValue] > a[keyValue]) ? -1 : 0))
+            listItems: this.state.listItems.sort((a, b) => (a[keyValue] > b[keyValue]) ? 1 : ((b[keyValue] > a[keyValue]) ? -1 : 0))
         }) : this.setState({
-            eyeglasses: this.state.eyeglasses.sort((a, b) => (a[keyValue] < b[keyValue]) ? 1 : ((b[keyValue] < a[keyValue]) ? -1 : 0))
+            listItems: this.state.listItems.sort((a, b) => (a[keyValue] < b[keyValue]) ? 1 : ((b[keyValue] < a[keyValue]) ? -1 : 0))
         })
     }
 
@@ -76,30 +76,30 @@ class EyeglassList extends React.Component {
     }
 
     renderRows() {
-        return (this.state.eyeglasses.map((eyeglass) => {
+        return (this.state.listItems.map((listItem) => {
                 return (
-                    <Row key={eyeglass.id}{...eyeglass}/>
+                    <Row key={listItem.id}{...listItem}/>
                 )
             })
         )
     }
 
     handleChange = (e) => {
-        let eyeglasses;
+        let listItems;
         this.setState({param: e.target.value}, async () => {
-            eyeglasses = await this.props.getEyeglasses(this.state.param);
+            listItems = await this.props.getEyeglasses(this.state.param);
             this.setState({
-                eyeglasses
+                listItems
             })
         });
     };
 
     render() {
         return (
-            <div className="eyeglass-container">
-                <div className="eyeglass-list-container">
+            <div className="list-container">
+                <div className="list-items-container">
                     <span>Eyeglass</span>
-                    <div className="eyeglass-list">
+                    <div className="list-items">
                         <div className="search-container">
                             <input placeholder="Search..." type="text" name="param"
                                    onChange={this.debounceEvent(this.handleChange, 700)}/>
@@ -133,6 +133,6 @@ function mapStateToProps(state) {
 
 }
 
-EyeglassList = connect(mapStateToProps, {getEyeglasses})(EyeglassList);
+List = connect(mapStateToProps, {getEyeglasses})(List);
 
-export default EyeglassList;
+export default List;

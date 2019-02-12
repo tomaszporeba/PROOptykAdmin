@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import * as actions from './actions'
 import './App.css';
 import Dashboard from "./components/Dashboard/Dashboard";
-import EyeglassList from "./components/Eyeglasses/EyeglassList";
+import List from "./components/Eyeglasses/List";
 import PrivateRoute from "./PrivateRoute";
 import Login from "./components/Login/Login";
 import './components/Dashboard/dashboard.css'
@@ -33,7 +33,7 @@ class App extends Component {
                             <div className="main-container">
                                 <SideMenu isOpen={this.state.sidebarOpen} />
                                 <PrivateRoute exact path="/dashboard" component={Dashboard}/>
-                                <PrivateRoute exact path="/eyeglass" component={EyeglassList}/>
+                                <PrivateRoute exact path="/eyeglass" component={List}/>
                             </div>
                         </div>
                     </div>
