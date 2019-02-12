@@ -40,7 +40,7 @@ class List extends React.Component {
     }
 
     async componentDidMount() {
-        let listItems = await this.props.getEyeglasses();
+        let listItems = await this.props.requestType();
         this.setState({
             listItems
         })
@@ -65,7 +65,7 @@ class List extends React.Component {
     }
 
     renderHeader() {
-        return (columns.map((column) => {
+        return (this.props.columns.map((column) => {
                 return (
                     <th key={column.title} onClick={() => this.sortArray(column.sortKeyValue)}>
                         {column.title}
@@ -87,7 +87,7 @@ class List extends React.Component {
     handleChange = (e) => {
         let listItems;
         this.setState({param: e.target.value}, async () => {
-            listItems = await this.props.getEyeglasses(this.state.param);
+            listItems = await this.props.requestType(this.state.param);
             this.setState({
                 listItems
             })
@@ -128,11 +128,6 @@ class List extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {};
-
-}
-
-List = connect(mapStateToProps, {getEyeglasses})(List);
+List = connect(null, {getEyeglasses})(List);
 
 export default List;
