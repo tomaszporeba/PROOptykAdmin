@@ -16,17 +16,38 @@ const columns = [
     {title: "Size", width: 2, sortKeyValue: "size"},
     {title: "Salon", width: 2, sortKeyValue: "salon"}];
 
+const clickableItems = ['number', 'name', 'title', 'holderName', 'lastName'];
+
 const Row = (...listItems) => {
     let rows = [];
     let omitted = ['createdAt', 'updatedAt', 'id'];
     for (let key in listItems[0]) {
         if (listItems[0].hasOwnProperty(key)) {
             if (!omitted.includes(key)) {
-                rows.push(<td key={listItems[0][key]}>{listItems[0][key]}</td>)
+                if (typeof listItems[0][key] === 'object') {
+
+                    rows.push(LinkItem(listItems[0][key]))
+                } else {
+                    rows.push(<td key={listItems[0][key]}>{listItems[0][key]}</td>)
+                }
             }
         }
     }
     return (<tr>{rows}</tr>);
+};
+
+const LinkItem = ({...items}) => {
+    let concatenatedItems=``;
+    for (let key in items) {
+        if (items.hasOwnProperty(key)) {
+            if (clickableItems.includes(key)) {
+                console.log(items[key]);
+                concatenatedItems = concatenatedItems + `${items[key]} `;
+                console.log(concatenatedItems);
+            }
+        }
+    }
+    return(<td><Link to="/client/review">{concatenatedItems}</Link></td>)
 };
 
 

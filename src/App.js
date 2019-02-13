@@ -5,12 +5,13 @@ import * as actions from './actions'
 import './App.css';
 import Dashboard from "./components/Dashboard/Dashboard";
 import List from "./components/Eyeglasses/List";
+import ClientReview from "./components/Client/ClientReview";
 import PrivateRoute from "./PrivateRoute";
 import Login from "./components/Login/Login";
 import './components/Dashboard/dashboard.css'
 import SideMenu from './components/SideMenu/SideMenu'
 import Header from './components/Header/Header';
-import {getEyeglasses, getInvoices} from "./actions";
+import {getEyeglasses, getInvoices, getExaminations} from "./actions";
 
 const eyeglassColumns =
     [{title: "Holder name", width: 2, sortKeyValue: "holder_name"},
@@ -28,6 +29,12 @@ const invoiceColumns = [{title: "Number", width: 2, sortKeyValue: "number"},
     {title: "Company", width: 2, sortKeyValue: "company"},
     {title: "Product", width: 2, sortKeyValue: "product"},
     {title: "Account Number", width: 2, sortKeyValue: "accountNumber"}]
+;
+
+const examinationColumns = [{title: "Scheduled date", width: 2, sortKeyValue: "scheduledDate"},
+    {title: "Right eye", width: 2, sortKeyValue: "rightEye"},
+    {title: "Left eye", width: 2, sortKeyValue: "leftEye"},
+    {title: "Client", width:2, sortKeyValue:"client"}]
 ;
 
 class App extends Component {
@@ -56,6 +63,9 @@ class App extends Component {
                                               component={List}/>
                                 <PrivateRoute exact path="/invoice" columns={invoiceColumns} requestType={this.props.getInvoices}
                                               component={List}/>
+                                <PrivateRoute exact path="/examination" columns={examinationColumns} requestType={this.props.getExaminations}
+                                              component={List}/>
+                                <PrivateRoute exact path="/client/review" component={ClientReview}/>
                             </div>
                         </div>
                     </div>
@@ -67,4 +77,4 @@ class App extends Component {
 }
 
 
-export default connect(null, {getEyeglasses, getInvoices})(App);
+export default connect(null, {getEyeglasses, getInvoices, getExaminations})(App);
