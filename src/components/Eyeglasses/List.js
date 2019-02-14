@@ -12,22 +12,40 @@ const associatedItems = {
     Invoices: "invoice/review",
 };
 
-const Row = (...listItems) => {
-    let rows = [];
+class Row  extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isClicked: true
+        }
+    }
+    render() {
+        let listItem = this.props.listItem;
+        let height = this.state.isClicked ? "60px" : "150px";
+        return (<tr style={{height: height}} onClick={() => {this.setState({isClicked: !this.state.isClicked})}}><Fields listItem={listItem}/></tr>);
+    }
+
+}
+
+
+const Fields = ({listItem}) => {
+    let fields = [];
     let omitted = ['createdAt', 'updatedAt', 'id'];
-    for (let key in listItems[0]) {
-        if (listItems[0].hasOwnProperty(key)) {
+    for (let key in listItem) {
+        if (listItem.hasOwnProperty(key)) {
             if (!omitted.includes(key)) {
-                if (typeof listItems[0][key] === 'object') {
-                    rows.push(LinkItem(key, listItems[0][key]))
+                if (typeof listItem[key] === 'object') {
+                    fields.push(LinkItem(key, listItem[key]))
                 } else {
-                    rows.push(<td key={listItems[0][key]}>{listItems[0][key]}</td>)
+                    fields.push(<td key={listItem[key]}>{listItem[key]}</td>)
                 }
             }
         }
     }
-    return (<tr>{rows}</tr>);
+    return (fields);
 };
+
+
 
 const LinkItem = ( key, { ...items}) => {
     let concatenatedItems=``;
@@ -91,7 +109,7 @@ class List extends React.Component {
     renderRows() {
         return (this.state.listItems.map((listItem) => {
                 return (
-                    <Row key={listItem.id}{...listItem}/>
+                    <Row listItem={listItem}/>
                 )
             })
         )
