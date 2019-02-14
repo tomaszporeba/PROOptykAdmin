@@ -11,7 +11,7 @@ import Login from "./components/Login/Login";
 import './components/Dashboard/dashboard.css'
 import SideMenu from './components/SideMenu/SideMenu'
 import Header from './components/Header/Header';
-import {getEyeglasses, getInvoices, getExaminations} from "./actions";
+import {getEyeglasses, getInvoices, getExaminations, getClients} from "./actions";
 
 const eyeglassColumns =
     [{title: "Holder name", width: 2, sortKeyValue: "holder_name"},
@@ -28,13 +28,19 @@ const invoiceColumns = [{title: "Number", width: 2, sortKeyValue: "number"},
     {title: "Amount", width: 2, sortKeyValue: "amount"},
     {title: "Company", width: 2, sortKeyValue: "company"},
     {title: "Product", width: 2, sortKeyValue: "product"},
-    {title: "Account Number", width: 2, sortKeyValue: "accountNumber"}]
+    {title: "Account Number", width: 2, sortKeyValue: "accountNumber"},
+    {title: "Client", width: 2, sortKeyValue:"clientId"}]
 ;
 
 const examinationColumns = [{title: "Scheduled date", width: 2, sortKeyValue: "scheduledDate"},
     {title: "Right eye", width: 2, sortKeyValue: "rightEye"},
     {title: "Left eye", width: 2, sortKeyValue: "leftEye"},
     {title: "Client", width:2, sortKeyValue:"client"}]
+;
+
+const clientColumns = [{title: "Name", width: 2, sortKeyValue: "name"},
+    {title: "Last name", width: 2, sortKeyValue: "lastName"},
+    {title: "Phone number", width: 2, sortKeyValue: "phoneNumber"}]
 ;
 
 class App extends Component {
@@ -65,6 +71,8 @@ class App extends Component {
                                               component={List}/>
                                 <PrivateRoute exact path="/examination" columns={examinationColumns} requestType={this.props.getExaminations}
                                               component={List}/>
+                                <PrivateRoute exact path="/client" columns={clientColumns} requestType={this.props.getClients}
+                                              component={List}/>
                                 <PrivateRoute exact path="/client/review" component={ClientReview}/>
                             </div>
                         </div>
@@ -77,4 +85,4 @@ class App extends Component {
 }
 
 
-export default connect(null, {getEyeglasses, getInvoices, getExaminations})(App);
+export default connect(null, {getEyeglasses, getInvoices, getExaminations, getClients})(App);

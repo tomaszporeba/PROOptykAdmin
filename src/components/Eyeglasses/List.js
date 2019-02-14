@@ -5,18 +5,12 @@ import { getEyeglasses} from "../../actions";
 import {connect} from "react-redux";
 import _ from 'lodash';
 
-
-const columns = [
-    {title: "Holder name", width: 2, sortKeyValue: "holder_name"},
-    {title: "Purchase price", width: 2, sortKeyValue: "purchase_price"},
-    {title: "Price", width: 2, sortKeyValue: "price"},
-    {title: "Vat", width: 2, sortKeyValue: "vat"},
-    {title: "Availability", width: 2, sortKeyValue: "availability"},
-    {title: "Color", width: 2, sortKeyValue: "color"},
-    {title: "Size", width: 2, sortKeyValue: "size"},
-    {title: "Salon", width: 2, sortKeyValue: "salon"}];
-
 const clickableItems = ['number', 'name', 'title', 'holderName', 'lastName'];
+
+const associatedItems = {
+    Client: "client/review",
+    Invoices: "invoice/review",
+};
 
 const Row = (...listItems) => {
     let rows = [];
@@ -25,8 +19,7 @@ const Row = (...listItems) => {
         if (listItems[0].hasOwnProperty(key)) {
             if (!omitted.includes(key)) {
                 if (typeof listItems[0][key] === 'object') {
-
-                    rows.push(LinkItem(listItems[0][key]))
+                    rows.push(LinkItem(key, listItems[0][key]))
                 } else {
                     rows.push(<td key={listItems[0][key]}>{listItems[0][key]}</td>)
                 }
@@ -36,18 +29,17 @@ const Row = (...listItems) => {
     return (<tr>{rows}</tr>);
 };
 
-const LinkItem = ({...items}) => {
+const LinkItem = ( key, { ...items}) => {
     let concatenatedItems=``;
+    let path = `${associatedItems[key]}/${items.id}`;
     for (let key in items) {
         if (items.hasOwnProperty(key)) {
             if (clickableItems.includes(key)) {
-                console.log(items[key]);
                 concatenatedItems = concatenatedItems + `${items[key]} `;
-                console.log(concatenatedItems);
             }
         }
     }
-    return(<td><Link to="/client/review">{concatenatedItems}</Link></td>)
+    return(<td><Link to={path}>{concatenatedItems}</Link></td>)
 };
 
 
