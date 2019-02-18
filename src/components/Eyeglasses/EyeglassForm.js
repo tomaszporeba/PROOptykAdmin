@@ -1,11 +1,23 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
-import {reduxForm, Field} from 'redux-form';
-import { Link } from 'react-router-dom';
+import {reduxForm, Field, initialize} from 'redux-form';
+import {connect} from "react-redux";
+import {getEyeglass} from "../../actions";
+import {Link, withRouter} from 'react-router-dom';
 import EyeglassField from "./EyeglassField";
 import formFields from './formFields';
 
 class EyeglassForm extends Component {
+
+
+    componentDidMount() {
+        this.handleInitialize();
+    }
+
+    async handleInitialize() {
+        const eyeglass = await this.props.getEyeglass(window.location.pathname.split("/").pop());
+        this.props.initialize(eyeglass);
+    }
 
     renderFields() {
         return _.map(formFields, ({label, name, type}) => {
@@ -39,10 +51,10 @@ class EyeglassForm extends Component {
 function validate(values) {
     const errors = {};
 
-    _.each(formFields, ({ name }) => {
-       if (!values[name]) {
-           errors[name] = "You must provide a value";
-       }
+    _.each(formFields, ({name}) => {
+        if (!values[name]) {
+            errors[name] = "You must provide a value";
+        }
     });
 
     if (!values.title) {
@@ -50,6 +62,8 @@ function validate(values) {
     }
     return errors;
 }
+
+EyeglassForm = connect(null, {getEyeglass})(withRouter(EyeglassForm));
 
 export default reduxForm({
     validate,

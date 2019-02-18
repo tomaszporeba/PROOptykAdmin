@@ -12,6 +12,7 @@ import './components/Dashboard/dashboard.css'
 import SideMenu from './components/SideMenu/SideMenu'
 import Header from './components/Header/Header';
 import {getEyeglasses, getInvoices, getExaminations, getClients} from "./actions";
+import EyeglassNew from "./components/Eyeglasses/EyeglassNew";
 
 const eyeglassColumns =
     [{title: "Holder name", width: 2, sortKeyValue: "holder_name"},
@@ -73,6 +74,7 @@ class App extends Component {
                                               component={List}/>
                                 <PrivateRoute exact path="/client" columns={clientColumns} requestType={this.props.getClients}
                                               component={List}/>
+                                <PrivateRoute exact path="/eyeglass/edit/:id" component={EyeglassNew}/>
                                 <PrivateRoute exact path="/client/review" component={ClientReview}/>
                             </div>
                         </div>

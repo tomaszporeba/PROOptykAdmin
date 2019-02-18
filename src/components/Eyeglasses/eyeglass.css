@@ -62,11 +62,32 @@
 
 .table-container tr {
     display: flex;
+    border: 0;
     width: 100%;
-    flex-grow: 1;
+    height: 60px;
     background-color: blueviolet;
-    justify-content: space-between;
+    will-change: transition;
+    -webkit-transition: height .5s ease-in-out;
+    -moz-transition: height .5s ease-in-out;
+    -o-transition: height .5s ease-in-out;
+    transition: height .5s ease-in-out;
+}
 
+
+.list-item-class {
+    flex-flow: column;
+    justify-content: flex-start;
+    height: 100px!important;
+}
+
+.fields-container {
+    display:flex;
+    flex:1
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .table-container  thead>tr {
@@ -80,8 +101,11 @@
 .table-container th, td {
     flex-grow: 1;
     flex-basis: 0;
-    display: flex;
+    height: 60px;
+    display: flex!important;
+    align-items: center;
     justify-content: flex-start;
+
 }
 .table-container th {
     cursor: pointer;
@@ -107,4 +131,17 @@
 
 .search-container span{
     margin-right: 20px;
+}
+
+.edit-button {
+    font: 1.5em bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 8px;
+    align-self: flex-end;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    background-color: #fb0012;
 }

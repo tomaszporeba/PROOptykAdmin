@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import './eyeglass.css'
-import { getEyeglasses} from "../../actions";
+import {getEyeglasses} from "../../actions";
 import {connect} from "react-redux";
 import _ from 'lodash';
 
@@ -12,17 +12,37 @@ const associatedItems = {
     Invoices: "invoice/review",
 };
 
-class Row  extends React.Component {
+class Row extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             isClicked: true
         }
     }
+
     render() {
         let listItem = this.props.listItem;
-        let height = this.state.isClicked ? "60px" : "150px";
-        return (<tr style={{height: height}} onClick={() => {this.setState({isClicked: !this.state.isClicked})}}><Fields listItem={listItem}/></tr>);
+        let listItemClass = this.state.isClicked ? "" : "list-item-class";
+        let editPath = `${window.location.pathname}/edit/${listItem.id}`;
+        let deletePath = `${window.location.pathname}/delete/${listItem.id}`;
+        return (
+            <tr className={listItemClass} onClick={() => {
+                this.setState({isClicked: !this.state.isClicked});
+            }}>
+                <div className="fields-container">
+                    <Fields listItem={listItem}/>
+                </div>
+                {this.state.isClicked ? '' : <div className="button-container">
+                    <div className="edit-button">
+                        <Link to={editPath}> - </Link>
+                    </div>
+                    <div className="edit-button">
+                        <Link to={deletePath}> + </Link>
+                    </div>
+                </div>}
+
+
+            </tr>);
     }
 
 }
@@ -46,9 +66,8 @@ const Fields = ({listItem}) => {
 };
 
 
-
-const LinkItem = ( key, { ...items}) => {
-    let concatenatedItems=``;
+const LinkItem = (key, {...items}) => {
+    let concatenatedItems = ``;
     let path = `${associatedItems[key]}/${items.id}`;
     for (let key in items) {
         if (items.hasOwnProperty(key)) {
@@ -57,7 +76,7 @@ const LinkItem = ( key, { ...items}) => {
             }
         }
     }
-    return(<td><Link to={path}>{concatenatedItems}</Link></td>)
+    return (<td><Link to={path}>{concatenatedItems}</Link></td>)
 };
 
 

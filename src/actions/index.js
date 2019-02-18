@@ -18,6 +18,12 @@ export const getEyeglasses = (param) => async dispatch => {
     return res.data;
 };
 
+export const getEyeglass = (param) => async dispatch => {
+    dispatch({type: AUTHENTICATED_REQUEST});
+    const res = await axios.get(`http://localhost:8000/api/eyeglass/${param}`, );
+    return res.data;
+};
+
 export const getInvoices = (param) => async dispatch => {
     dispatch({type: AUTHENTICATED_REQUEST});
     const res = await axios.get("http://localhost:8000/api/invoice", {params:{search: param}});
