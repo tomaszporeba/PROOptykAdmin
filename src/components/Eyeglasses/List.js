@@ -33,12 +33,16 @@ class Row extends React.Component {
                     <Fields listItem={listItem}/>
                 </div>
                 {this.state.isClicked ? '' : <div className="button-container">
-                    <div className="edit-button">
-                        <Link to={editPath}> - </Link>
-                    </div>
-                    <div className="edit-button">
-                        <Link to={deletePath}> + </Link>
-                    </div>
+                    <Link to={editPath}>
+                        <div className="edit-button">
+                            -
+                        </div>
+                    </Link>
+                    <Link to={deletePath}>
+                        <div className="edit-button">
+                            +
+                        </div>
+                    </Link>
                 </div>}
 
 
