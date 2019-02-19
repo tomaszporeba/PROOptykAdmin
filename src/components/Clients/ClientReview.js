@@ -12,7 +12,7 @@ class ClientReview extends Component {
 
 
     submit = () => {
-        this.props.saveClient(this.props.formValues, this.history);
+        this.props.saveClient(this.props.formValues, this.props.history);
     };
     reviewFields = _.map(formFields, ({ name, label }) => {
         return (

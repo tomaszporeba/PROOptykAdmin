@@ -12,7 +12,7 @@ class EyeglassReview extends Component {
 
 
     submit = () => {
-        this.props.saveEyeglass(this.props.formValues, this.history);
+        this.props.saveEyeglass(this.props.formValues, this.props.history);
     };
     reviewFields = _.map(formFields, ({ name, label }) => {
         return (

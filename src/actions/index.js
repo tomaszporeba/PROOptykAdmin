@@ -56,7 +56,7 @@ export const saveClient = (values, history) => async dispatch => {
     await axios.post(`http://localhost:8000/api/client/update`,
         values
     );
-    // history.push("/client")
+    history.push("/client")
 
 };
 
