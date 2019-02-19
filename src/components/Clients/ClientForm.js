@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import _ from 'lodash';
 import {reduxForm, Field, initialize} from 'redux-form';
 import {connect} from "react-redux";
-import {getEyeglass} from "../../actions";
+import {getClient} from "../../actions";
 import {Link, withRouter} from 'react-router-dom';
-import EyeglassField from "../utils/InputField";
+import ClientField from "../utils/InputField";
 import formFields from './formFields';
 
-class EyeglassForm extends Component {
+class ClientForm extends Component {
 
 
     componentDidMount() {
@@ -15,15 +15,15 @@ class EyeglassForm extends Component {
     }
 
     async handleInitialize() {
-        const eyeglass = await this.props.getEyeglass(window.location.pathname.split("/").pop());
-        this.props.initialize(eyeglass);
+        const client = await this.props.getClient(window.location.pathname.split("/").pop());
+        this.props.initialize(client);
     }
 
     renderFields() {
         return _.map(formFields, ({label, name, type}) => {
             return <Field
                 key={name}
-                component={EyeglassField}
+                component={ClientField}
                 type={type}
                 label={label}
                 name={name}/>
@@ -33,9 +33,9 @@ class EyeglassForm extends Component {
     render() {
         return (
             <div>
-                <form onSubmit={this.props.handleSubmit(this.props.onEyeglassSubmit)}>
+                <form onSubmit={this.props.handleSubmit(this.props.onClientSubmit)}>
                     {this.renderFields()}
-                    <Link to="/eyeglass" className="red btn-flat white-text">
+                    <Link to="/client" className="red btn-flat white-text">
                         Cancel
                     </Link>
                     <button type="submit" className="black btn-flat right white-text">
@@ -63,10 +63,10 @@ function validate(values) {
     return errors;
 }
 
-EyeglassForm = connect(null, {getEyeglass})(withRouter(EyeglassForm));
+ClientForm = connect(null, {getClient})(withRouter(ClientForm));
 
 export default reduxForm({
     validate,
-    form: 'eyeglassForm',
+    form: 'clientForm',
     destroyOnUnmount: false
-})(EyeglassForm);
+})(ClientForm);

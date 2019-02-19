@@ -44,10 +44,25 @@ export const getClients = (param) => async dispatch => {
 
 export const saveEyeglass = (values, history) => async dispatch => {
     dispatch({type: AUTHENTICATED_REQUEST});
-    await axios.post("http://localhost:8080/eyeglasses/add",
+    await axios.post(`http://localhost:8000/api/eyeglass/update`,
     values
     );
     history.push("/eyeglass")
 
+};
+
+export const saveClient = (values, history) => async dispatch => {
+    dispatch({type: AUTHENTICATED_REQUEST});
+    await axios.post(`http://localhost:8000/api/client/update`,
+        values
+    );
+    // history.push("/client")
+
+};
+
+export const getClient = (param) => async dispatch => {
+    dispatch({type: AUTHENTICATED_REQUEST});
+    const res = await axios.get(`http://localhost:8000/api/client/${param}`, );
+    return res.data;
 };
 

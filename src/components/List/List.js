@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import './eyeglass.css'
+import './list.css'
 import {getEyeglasses} from "../../actions";
 import {connect} from "react-redux";
 import _ from 'lodash';
@@ -35,12 +35,12 @@ class Row extends React.Component {
                 {this.state.isClicked ? '' : <div className="button-container">
                     <Link to={editPath}>
                         <div className="edit-button">
-                            -
+                            Edit
                         </div>
                     </Link>
                     <Link to={deletePath}>
                         <div className="edit-button">
-                            +
+                            Del
                         </div>
                     </Link>
                 </div>}

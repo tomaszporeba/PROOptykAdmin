@@ -121,7 +121,7 @@
     word-wrap: break-word;
     overflow: auto;
 }
-.table-container tr:nth-child(2) {
+.table-container tr:nth-child(even) {
     background-color: green;
 }
 

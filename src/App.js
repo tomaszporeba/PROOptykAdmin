@@ -1,18 +1,17 @@
 import React, {Component} from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
-import * as actions from './actions'
 import './App.css';
 import Dashboard from "./components/Dashboard/Dashboard";
-import List from "./components/Eyeglasses/List";
-import ClientReview from "./components/Client/ClientReview";
+import List from "./components/List/List";
 import PrivateRoute from "./PrivateRoute";
 import Login from "./components/Login/Login";
 import './components/Dashboard/dashboard.css'
-import SideMenu from './components/SideMenu/SideMenu'
+import SideMenu from './components/utils/SideMenu/SideMenu'
 import Header from './components/Header/Header';
 import {getEyeglasses, getInvoices, getExaminations, getClients} from "./actions";
 import EyeglassNew from "./components/Eyeglasses/EyeglassNew";
+import ClientNew from "./components/Clients/ClientNew";
 
 const eyeglassColumns =
     [{title: "Holder name", width: 2, sortKeyValue: "holder_name"},
@@ -75,7 +74,9 @@ class App extends Component {
                                 <PrivateRoute exact path="/client" columns={clientColumns} requestType={this.props.getClients}
                                               component={List}/>
                                 <PrivateRoute exact path="/eyeglass/edit/:id" component={EyeglassNew}/>
-                                <PrivateRoute exact path="/client/review" component={ClientReview}/>
+                                <PrivateRoute exact path="/eyeglass/new" component={EyeglassNew}/>
+                                <PrivateRoute exact path="/client/edit/:id" component={ClientNew}/>
+                                <PrivateRoute exact path="/client/new" component={ClientNew}/>
                             </div>
                         </div>
                     </div>
