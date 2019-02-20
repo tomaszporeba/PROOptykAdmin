@@ -8,8 +8,8 @@ import _ from 'lodash';
 const clickableItems = ['number', 'name', 'title', 'holderName', 'lastName'];
 
 const associatedItems = {
-    Client: "client/review",
-    Invoices: "invoice/review",
+    Client: "client/edit",
+    Invoices: "invoice/edit",
 };
 
 class Row extends React.Component {
@@ -44,8 +44,6 @@ class Row extends React.Component {
                         </div>
                     </Link>
                 </div>}
-
-
             </tr>);
     }
 
@@ -130,12 +128,7 @@ class List extends React.Component {
     }
 
     renderRows() {
-        return (this.state.listItems.map((listItem) => {
-                return (
-                    <Row listItem={listItem}/>
-                )
-            })
-        )
+        return (this.state.listItems.map((listItem) => <Row listItem={listItem}/>))
     }
 
     handleChange = (e) => {
