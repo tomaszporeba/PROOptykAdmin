@@ -2,16 +2,25 @@ import React, {Component} from 'react';
 import _ from 'lodash';
 import {reduxForm, Field, initialize} from 'redux-form';
 import {connect} from "react-redux";
-import {getInvoice} from "../../actions";
+import {getInvoice, getClients} from "../../actions";
 import {Link, withRouter} from 'react-router-dom';
-import InvoiceField from "../utils/InputField";
+import InputField from "../utils/InputField";
+import DropDownSelect from "../utils/DropDownSelect";
 import formFields from './formFields';
 
 class InvoiceForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            clients: []
+        }
+    }
 
-
-    componentDidMount() {
+    async componentDidMount() {
+        let clients = await this.props.getClients();
+        this.setState({clients});
         this.handleInitialize();
+
     }
 
     async handleInitialize() {
@@ -21,20 +30,33 @@ class InvoiceForm extends Component {
 
     renderFields() {
         return _.map(formFields, ({label, name, type}) => {
-            return <Field
-                key={name}
-                component={InvoiceField}
-                type={type}
-                label={label}
-                name={name}/>
+            if (type === "select") {
+                return <Field
+                    name="clientId"
+                    label="Client"
+                    component={DropDownSelect}
+                    options={this.state.clients}
+                />
+            } else {
+                return <Field
+                    key={name}
+                    component={InputField}
+                    type={type}
+                    label={label}
+                    name={name}/>
+            }
+
         })
     }
 
+
     render() {
+
         return (
             <div>
                 <form onSubmit={this.props.handleSubmit(this.props.onInvoiceSubmit)}>
                     {this.renderFields()}
+
                     <Link to="/invoice" className="red btn-flat white-text">
                         Cancel
                     </Link>
@@ -63,7 +85,7 @@ function validate(values) {
     return errors;
 }
 
-InvoiceForm = connect(null, {getInvoice})(withRouter(InvoiceForm));
+InvoiceForm = connect(null, {getInvoice, getClients})(withRouter(InvoiceForm));
 
 export default reduxForm({
     validate,

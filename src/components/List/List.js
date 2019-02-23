@@ -26,10 +26,12 @@ class Row extends React.Component {
         let editPath = `${window.location.pathname}/edit/${listItem.id}`;
         let deletePath = `${window.location.pathname}/delete/${listItem.id}`;
         return (
+
             <tr className={listItemClass} onClick={() => {
                 this.setState({isClicked: !this.state.isClicked});
             }}>
                 <div className="fields-container">
+
                     <Fields listItem={listItem}/>
                 </div>
                 {this.state.isClicked ? '' : <div className="button-container">

@@ -4,4 +4,4 @@ export default [
     {label: 'Company', name: 'company', type: "text"},
     {label: 'Product', name: 'product', type: "text"},
     {label: 'Account Number', name: 'accountNumber', type: "number"},
-    {label: 'Client', name: 'clientId', type: "number"}];
+    {label: 'Client', name: 'clientId', type: "select"}];
