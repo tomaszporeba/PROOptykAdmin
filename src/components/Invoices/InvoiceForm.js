@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {getInvoice, getClients} from "../../actions";
 import {Link, withRouter} from 'react-router-dom';
 import InputField from "../utils/InputField";
-import DropDownSelect from "../utils/DropDownSelect";
+import DropDownSelect from "../utils/DropDownSelect/DropDownSelect";
 import formFields from './formFields';
 
 class InvoiceForm extends Component {
@@ -18,6 +18,7 @@ class InvoiceForm extends Component {
 
     async componentDidMount() {
         let clients = await this.props.getClients();
+        clients = clients.map((client) =>{ client.label = `${client.name} ${client.lastName}`; return client});
         this.setState({clients});
         this.handleInitialize();
 
@@ -31,12 +32,12 @@ class InvoiceForm extends Component {
     renderFields() {
         return _.map(formFields, ({label, name, type}) => {
             if (type === "select") {
-                return <Field
+                return (<Field
                     name="clientId"
                     label="Client"
                     component={DropDownSelect}
                     options={this.state.clients}
-                />
+                />)
             } else {
                 return <Field
                     key={name}
