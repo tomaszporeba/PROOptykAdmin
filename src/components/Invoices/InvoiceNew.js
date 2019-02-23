@@ -24,8 +24,4 @@ class InvoiceNew extends Component{
     }
 }
 
-export default reduxForm(
-    {
-        form: 'invoiceForm'
-    }
-)(InvoiceNew);
+export default InvoiceNew;

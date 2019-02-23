@@ -23,7 +23,7 @@ const logAction = store => {
     }
 };
 
-const store = createStore(reducers, startState, applyMiddleware(reduxThunk, logAction));
+const store = createStore(reducers, startState, applyMiddleware(reduxThunk));
 
 
 ReactDOM.render(

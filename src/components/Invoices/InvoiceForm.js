@@ -7,13 +7,28 @@ import {Link, withRouter} from 'react-router-dom';
 import InputField from "../utils/InputField";
 import DropDownSelect from "../utils/DropDownSelect/DropDownSelect";
 import formFields from './formFields';
+import Modal from 'react-modal';
+import './../utils/DropDownSelect/dropDownSelect.css'
+import ClientNew from './../Clients/ClientNew'
 
 class InvoiceForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            showModal: false,
             clients: []
-        }
+        };
+
+        this.handleCloseModal = this.handleCloseModal.bind(this);
+
+    }
+
+    handleOpenModal () {
+        this.setState({ showModal: true });
+    }
+
+    handleCloseModal () {
+        this.setState({ showModal: false });
     }
 
     async componentDidMount() {
@@ -29,6 +44,7 @@ class InvoiceForm extends Component {
         this.props.initialize(invoice);
     }
 
+
     renderFields() {
         return _.map(formFields, ({label, name, type}) => {
             if (type === "select") {
@@ -36,6 +52,7 @@ class InvoiceForm extends Component {
                     name="clientId"
                     label="Client"
                     component={DropDownSelect}
+                    handleOpenModal={() => this.handleOpenModal()}
                     options={this.state.clients}
                 />)
             } else {
@@ -49,7 +66,6 @@ class InvoiceForm extends Component {
 
         })
     }
-
 
     render() {
 
@@ -66,6 +82,15 @@ class InvoiceForm extends Component {
                         <i className="material-icons right">done</i>
                     </button>
                 </form>
+                <Modal
+                    isOpen={this.state.showModal}
+                    contentLabel="onRequestClose Example"
+                    onRequestClose={this.handleCloseModal}
+                    className="Modal"
+                    overlayClassName="Overlay"
+                >
+                    <ClientNew handleModalSubmit={this.handleCloseModal} isModal={true}/>
+                </Modal>
             </div>
         );
     }
@@ -90,6 +115,7 @@ InvoiceForm = connect(null, {getInvoice, getClients})(withRouter(InvoiceForm));
 
 export default reduxForm({
     validate,
+    touchOnBlur: false,
     form: 'invoiceForm',
     destroyOnUnmount: false
 })(InvoiceForm);

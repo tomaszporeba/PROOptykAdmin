@@ -51,12 +51,11 @@ export const saveEyeglass = (values, history) => async dispatch => {
 
 };
 
-export const saveClient = (values, history) => async dispatch => {
+export const saveClient = (values) => async dispatch => {
     dispatch({type: AUTHENTICATED_REQUEST});
     await axios.post(`http://localhost:8000/api/client/update`,
         values
     );
-    history.push("/client")
 
 };
 

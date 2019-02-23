@@ -3,13 +3,20 @@ import ClientReview from './ClientReview';
 import ClientForm from './ClientForm';
 import { reduxForm } from 'redux-form';
 
-
 class ClientNew extends Component{
-    state = { showFormReview: false };
+    state = {
+        showFormReview: false,
+        isModal: this.props.isModal || false
+    };
+
+    handleModal = () =>  {
+        this.props.handleModalSubmit()
+    };
+
 
     renderContent() {
         if (this.state.showFormReview) {
-            return <ClientReview onCancel={() => this.setState({ showFormReview: false })}/>;
+            return <ClientReview handleModalSubmit={() =>  this.handleModal()} isModal={this.state.isModal} onCancel={() => this.setState({ showFormReview: false })}/>;
         }
 
         return <ClientForm onClientSubmit={() => this.setState({ showFormReview: true })}/>;
@@ -18,11 +25,14 @@ class ClientNew extends Component{
     render() {
         return (
             <div>
-                {this.renderContent()}
+                {
+                    this.renderContent()
+                }
             </div>
         );
     }
 }
+
 
 export default reduxForm(
     {
