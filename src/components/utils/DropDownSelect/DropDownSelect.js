@@ -28,21 +28,24 @@ export class DropDownSelect extends Component {
 
     createClient = (event) => {
         if (event.detail === 0) {
-            if (event.target.value === "0") {
+            if (event.target.value == 0) {
                 this.props.handleOpenModal()
             }
         }
     };
+    onChange = (event) => {
+        console.log(event.target.value)
+    }
     render() {
         const {options, label, ...input} = this.props;
         if (options) {
             return (
                 <div>
                     <label>{label}</label>
-                    <select {...input} className="browser-default" value={this.state.defaultValue} onClick={this.createClient}>
+                    <select {...input} className="browser-default"  onChange={this.onChange} onClick={this.createClient}>
                         <option value="" disabled selected hidden>None</option>
                         <optgroup label="Add">
-                            <option onClick={() => this.createClient} value={"0"}>Add client</option>
+                            <option value={0}>Add client</option>
                         </optgroup>
                         <optgroup label="Choose">
                             {options.map(this.renderSelectOptions)}

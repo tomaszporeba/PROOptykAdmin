@@ -28,13 +28,18 @@ class InvoiceForm extends Component {
     }
 
     handleCloseModal () {
+        this.getClients();
         this.setState({ showModal: false });
     }
 
-    async componentDidMount() {
+    getClients = async () => {
         let clients = await this.props.getClients();
         clients = clients.map((client) =>{ client.label = `${client.name} ${client.lastName}`; return client});
         this.setState({clients});
+    };
+
+    componentDidMount() {
+        this.getClients();
         this.handleInitialize();
 
     }
