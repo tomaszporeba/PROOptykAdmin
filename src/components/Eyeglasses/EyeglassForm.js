@@ -36,9 +36,9 @@ class EyeglassForm extends Component {
             <div>
                 <form onSubmit={this.props.handleSubmit(this.props.onEyeglassSubmit)}>
                     {this.renderFields()}
-                    <Link to="/eyeglass" className="red btn-flat white-text">
+                    <button onClick={this.props.history.goBack} className="red btn-flat white-text">
                         Cancel
-                    </Link>
+                    </button>
                     <button type="submit" className="black btn-flat right white-text">
                         Next
                         <i className="material-icons right">done</i>

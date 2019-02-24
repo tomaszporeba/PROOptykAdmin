@@ -7,8 +7,7 @@ import {Link, withRouter} from 'react-router-dom';
 import InputField from "../utils/InputField";
 import formFields from './formFields';
 import DropDownSelect from "../utils/DropDownSelect/DropDownSelect";
-import Modal from 'react-modal';
-import EyeglassNew from "./../Eyeglasses/EyeglassNew";
+import ModalHelper from "../utils/Modal/ModalHelper";
 
 class ClientForm extends Component {
     constructor(props) {
@@ -75,23 +74,15 @@ class ClientForm extends Component {
             <div>
                 <form onSubmit={this.props.handleSubmit(this.props.onClientSubmit)}>
                     {this.renderFields()}
-                    <Link to="/client" className="red btn-flat white-text">
+                    <button onClick={this.props.history.goBack} className="red btn-flat white-text">
                         Cancel
-                    </Link>
+                    </button>
                     <button type="submit" className="black btn-flat right white-text">
                         Next
                         <i className="material-icons right">done</i>
                     </button>
                 </form>
-                <Modal
-                    isOpen={this.state.showModal}
-                    contentLabel="onRequestClose Example"
-                    onRequestClose={this.handleCloseModal}
-                    className="Modal"
-                    overlayClassName="Overlay"
-                >
-                    <EyeglassNew handleModalSubmit={this.handleCloseModal} isModal={true}/>
-                </Modal>
+                {<ModalHelper handleCloseModal={this.handleCloseModal} isOpen={this.state.showModal} formType={"eyeglass"}/>}
             </div>
         );
     }

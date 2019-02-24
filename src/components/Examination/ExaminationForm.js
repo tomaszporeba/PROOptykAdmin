@@ -9,6 +9,8 @@ import formFields from './formFields';
 import DropDownSelect from "../utils/DropDownSelect/DropDownSelect";
 import Modal from 'react-modal';
 import ClientNew from "./../Clients/ClientNew";
+import ModalHelper from "../utils/Modal/ModalHelper";
+
 
 class ExaminationForm extends Component {
     constructor(props) {
@@ -76,23 +78,15 @@ class ExaminationForm extends Component {
             <div>
                 <form onSubmit={this.props.handleSubmit(this.props.onExaminationSubmit)}>
                     {this.renderFields()}
-                    <Link to="/examination" className="red btn-flat white-text">
+                    <button onClick={this.props.history.goBack} className="red btn-flat white-text">
                         Cancel
-                    </Link>
+                    </button>
                     <button type="submit" className="black btn-flat right white-text">
                         Next
                         <i className="material-icons right">done</i>
                     </button>
                 </form>
-                <Modal
-                    isOpen={this.state.showModal}
-                    contentLabel="onRequestClose Example"
-                    onRequestClose={this.handleCloseModal}
-                    className="Modal"
-                    overlayClassName="Overlay"
-                >
-                    <ClientNew handleModalSubmit={this.handleCloseModal} isModal={true}/>
-                </Modal>
+                {<ModalHelper handleCloseModal={this.handleCloseModal} isOpen={this.state.showModal} formType={"client"} />}
             </div>
         );
     }
