@@ -39,9 +39,17 @@ const examinationColumns = [{title: "Scheduled date", width: 2, sortKeyValue: "s
     {title: "Client", width:2, sortKeyValue:"client"}]
 ;
 
+
 const clientColumns = [{title: "Name", width: 2, sortKeyValue: "name"},
     {title: "Last name", width: 2, sortKeyValue: "lastName"},
-    {title: "Phone number", width: 2, sortKeyValue: "phoneNumber"}]
+    {title: "Phone number", width: 2, sortKeyValue: "phoneNumber"},
+    {title: "Left eye", width: 2, sortKeyValue: "leftEyeDefectOfVision"},
+    {title: "Right eye", width: 2, sortKeyValue: "rightEyeDefectOfVision"},
+    {title: "Order date", width: 2, sortKeyValue: "orderDate"},
+    {title: "Comments", width: 2, sortKeyValue: "comments"},
+    {title: "Eyeglass", width: 2, sortKeyValue: "eyeglassId"},
+
+    ]
 ;
 
 class App extends Component {

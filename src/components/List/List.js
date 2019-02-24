@@ -5,11 +5,12 @@ import {getEyeglasses} from "../../actions";
 import {connect} from "react-redux";
 import _ from 'lodash';
 
-const clickableItems = ['number', 'name', 'title', 'holderName', 'lastName'];
+const clickableItems = ['number', 'name', 'title', 'holder_name', 'lastName'];
 
 const associatedItems = {
     Client: "client/edit",
-    Invoices: "invoice/edit",
+    Invoice: "invoice/edit",
+    Eyeglass: "eyeglass/edit"
 };
 
 class Row extends React.Component {
