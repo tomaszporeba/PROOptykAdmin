@@ -10,7 +10,6 @@ import {fetchUser} from "../../actions";
 class LoginForm extends Component {
 
     submitLogin = (values) => {
-        // console.log(values);
         this.props.fetchUser(values, this.props.history)
     };
 

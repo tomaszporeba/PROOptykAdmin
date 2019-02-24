@@ -7,7 +7,8 @@ export class DropDownSelect extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            defaultValue: "None"
+            defaultValue: "None",
+            value: ""
         };
 
 
@@ -34,15 +35,15 @@ export class DropDownSelect extends Component {
         }
     };
     onChange = (event) => {
-        console.log(event.target.value)
-    }
+        this.setState({value: event.target.value})
+    };
     render() {
-        const {options, label, ...input} = this.props;
+        const {input, options, label, meta : { error, touched }} = this.props;
         if (options) {
             return (
                 <div>
                     <label>{label}</label>
-                    <select {...input} className="browser-default"  onChange={this.onChange} onClick={this.createClient}>
+                    <select {...input} className="browser-default"  value={this.state.value} onChange={this.onChange} onClick={this.createClient}>
                         <option value="" disabled selected hidden>None</option>
                         <optgroup label="Add">
                             <option value={0}>Add client</option>
@@ -51,7 +52,9 @@ export class DropDownSelect extends Component {
                             {options.map(this.renderSelectOptions)}
                         </optgroup>
                     </select>
-
+                    <div className="red-text">
+                        { touched && error }
+                    </div>
                 </div>
             )
         }

@@ -23,18 +23,21 @@ class InvoiceForm extends Component {
 
     }
 
-    handleOpenModal () {
-        this.setState({ showModal: true });
+    handleOpenModal() {
+        this.setState({showModal: true});
     }
 
-    handleCloseModal () {
+    handleCloseModal() {
         this.getClients();
-        this.setState({ showModal: false });
+        this.setState({showModal: false});
     }
 
     getClients = async () => {
         let clients = await this.props.getClients();
-        clients = clients.map((client) =>{ client.label = `${client.name} ${client.lastName}`; return client});
+        clients = clients.map((client) => {
+            client.label = `${client.name} ${client.lastName}`;
+            return client
+        });
         this.setState({clients});
     };
 
@@ -105,14 +108,12 @@ function validate(values) {
     const errors = {};
 
     _.each(formFields, ({name}) => {
+
         if (!values[name]) {
+
             errors[name] = "You must provide a value";
         }
     });
-
-    if (!values.title) {
-        errors.title = 'You must provide a title'
-    }
     return errors;
 }
 

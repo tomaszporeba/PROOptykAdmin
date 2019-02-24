@@ -5,7 +5,6 @@ import {AUTHENTICATED_REQUEST, FETCH_USER} from "./types";
 
 export const fetchUser = (values, history) => async dispatch => {
     const res = await axios.post("http://localhost:8000/auth/login", values);
-    console.log(res.status + " code");
     if (res.status <300 && res.status>=200) {
         dispatch({type: FETCH_USER, token: res.data.token, user: res.data});
         history.push("/")
