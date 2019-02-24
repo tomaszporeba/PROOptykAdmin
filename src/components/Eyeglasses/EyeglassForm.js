@@ -14,6 +14,7 @@ class EyeglassForm extends Component {
         this.handleInitialize();
     }
 
+
     async handleInitialize() {
         const eyeglass = await this.props.getEyeglass(window.location.pathname.split("/").pop());
         this.props.initialize(eyeglass);

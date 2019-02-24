@@ -41,13 +41,11 @@ export const getClients = (param) => async dispatch => {
     return res.data;
 };
 
-export const saveEyeglass = (values, history) => async dispatch => {
+export const saveEyeglass = (values) => async dispatch => {
     dispatch({type: AUTHENTICATED_REQUEST});
     await axios.post(`http://localhost:8000/api/eyeglass/update`,
     values
     );
-    history.push("/eyeglass")
-
 };
 
 export const saveClient = (values) => async dispatch => {
@@ -58,12 +56,11 @@ export const saveClient = (values) => async dispatch => {
 
 };
 
-export const saveInvoice = (values, history) => async dispatch => {
+export const saveInvoice = (values) => async dispatch => {
     dispatch({type: AUTHENTICATED_REQUEST});
     await axios.post(`http://localhost:8000/api/invoice/update`,
         values
     );
-    history.push("/invoice")
 
 };
 
@@ -77,5 +74,19 @@ export const getClient = (param) => async dispatch => {
     dispatch({type: AUTHENTICATED_REQUEST});
     const res = await axios.get(`http://localhost:8000/api/client/${param}`, );
     return res.data;
+};
+
+export const getExamination = (param) => async dispatch => {
+    dispatch({type: AUTHENTICATED_REQUEST});
+    const res = await axios.get(`http://localhost:8000/api/examination/${param}`, );
+    return res.data;
+};
+
+export const saveExamination = (values) => async dispatch => {
+    dispatch({type: AUTHENTICATED_REQUEST});
+    await axios.post(`http://localhost:8000/api/examination/update`,
+        values
+    );
+
 };
 

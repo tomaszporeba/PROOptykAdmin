@@ -11,8 +11,15 @@ import {saveEyeglass} from "../../actions";
 class EyeglassReview extends Component {
 
 
-    submit = () => {
-        this.props.saveEyeglass(this.props.formValues, this.props.history);
+    handleSubmit = async () => {
+        await this.props.saveEyeglass(this.props.formValues);
+        if (this.props.isModal) {
+            this.props.handleModalSubmit()
+
+        } else {
+            this.props.history.push("/client")
+        }
+
     };
     reviewFields = _.map(formFields, ({ name, label }) => {
         return (
@@ -31,7 +38,7 @@ class EyeglassReview extends Component {
                 <p>Please confirm your  entries</p>
                 { this.reviewFields }
                 <button className="red btn-flat white-text" onClick={ this.props.onCancel }>Cancel </button>
-                <button onClick={ this.submit} className="black btn-flat right white-text">Save</button>
+                <button onClick={ this.handleSubmit} className="black btn-flat right white-text">Save</button>
             </div>
         );
     }

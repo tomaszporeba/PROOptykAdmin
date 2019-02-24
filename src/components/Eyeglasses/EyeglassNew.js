@@ -5,11 +5,17 @@ import { reduxForm } from 'redux-form';
 
 
 class EyeglassNew extends Component{
-    state = { showFormReview: false };
+    state = {
+        showFormReview: false,
+        isModal: this.props.isModal || false
+    };
 
+    handleModal = () =>  {
+        this.props.handleModalSubmit()
+    };
     renderContent() {
         if (this.state.showFormReview) {
-            return <EyeglassReview onCancel={() => this.setState({ showFormReview: false })}/>;
+            return <EyeglassReview handleModalSubmit={() =>  this.handleModal()} isModal={this.state.isModal} onCancel={() => this.setState({ showFormReview: false })}/>;
         }
 
         return <EyeglassForm onEyeglassSubmit={() => this.setState({ showFormReview: true })}/>;

@@ -3,21 +3,17 @@ import { connect } from 'react-redux';
 import formFields from './formFields';
 import _ from 'lodash';
 import { withRouter } from 'react-router-dom';
-import {saveInvoice} from "../../actions";
+import {saveExamination} from "../../actions";
 
-
-
-
-class InvoiceReview extends Component {
-
+class ExaminationReview extends Component {
 
     handleSubmit = async () => {
-        await this.props.saveClient(this.props.formValues);
+        await this.props.saveExamination(this.props.formValues);
         if (this.props.isModal) {
             this.props.handleModalSubmit()
 
         } else {
-            this.props.history.push("/client")
+            this.props.history.push("/examination")
         }
 
     };
@@ -47,9 +43,9 @@ class InvoiceReview extends Component {
 
 function mapStateToProps(state) {
     return {
-        formValues: state.form.invoiceForm.values
+        formValues: state.form.examinationForm.values
     };
-    
+
 }
 
-export default connect(mapStateToProps, {saveInvoice})(withRouter(InvoiceReview));
+export default connect(mapStateToProps, {saveExamination})(withRouter(ExaminationReview));

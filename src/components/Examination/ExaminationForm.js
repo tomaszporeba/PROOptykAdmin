@@ -2,20 +2,20 @@ import React, {Component} from 'react';
 import _ from 'lodash';
 import {reduxForm, Field, initialize} from 'redux-form';
 import {connect} from "react-redux";
-import {getClient, getEyeglasses} from "../../actions";
+import {getExamination, getClients} from "../../actions";
 import {Link, withRouter} from 'react-router-dom';
 import InputField from "../utils/InputField";
 import formFields from './formFields';
 import DropDownSelect from "../utils/DropDownSelect/DropDownSelect";
 import Modal from 'react-modal';
-import EyeglassNew from "./../Eyeglasses/EyeglassNew";
+import ClientNew from "./../Clients/ClientNew";
 
-class ClientForm extends Component {
+class ExaminationForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
             showModal: false,
-            eyeglasses: []
+            clients: []
         };
         this.handleCloseModal = this.handleCloseModal.bind(this);
 
@@ -26,37 +26,38 @@ class ClientForm extends Component {
     }
 
     handleCloseModal() {
-        this.getEyeglasses();
+        this.getClients();
         this.setState({showModal: false});
     }
     componentDidMount() {
-        this.getEyeglasses();
+        this.getClients();
         this.handleInitialize();
     }
 
-    getEyeglasses = async () => {
-        let eyeglasses = await this.props.getEyeglasses();
-        eyeglasses = eyeglasses.map((eyeglass) => {
-            eyeglass.label = `${eyeglass.holder_name}`;
-            return eyeglass
+    getClients = async () => {
+        let clients = await this.props.getClients();
+        clients = clients.map((client) => {
+            client.label = `${client.name} ${client.lastName}`;
+            return client
         });
-        this.setState({eyeglasses});
+        this.setState({clients});
     };
 
     async handleInitialize() {
-        const eyeglass = await this.props.getClient(window.location.pathname.split("/").pop());
-        this.props.initialize(eyeglass);
+        const examination = await this.props.getExamination(window.location.pathname.split("/").pop());
+        this.props.initialize(examination);
     }
 
     renderFields() {
         return _.map(formFields, ({label, name, type}) => {
+            console.log(type);
             if (type === "select") {
                 return (<Field
-                    name="eyeglassId"
-                    label="Eyeglass"
+                    name="clientId"
+                    label="Client"
                     component={DropDownSelect}
                     handleOpenModal={() => this.handleOpenModal()}
-                    options={this.state.eyeglasses}
+                    options={this.state.clients}
                 />)
             } else {
                 return <Field
@@ -73,9 +74,9 @@ class ClientForm extends Component {
     render() {
         return (
             <div>
-                <form onSubmit={this.props.handleSubmit(this.props.onClientSubmit)}>
+                <form onSubmit={this.props.handleSubmit(this.props.onExaminationSubmit)}>
                     {this.renderFields()}
-                    <Link to="/client" className="red btn-flat white-text">
+                    <Link to="/examination" className="red btn-flat white-text">
                         Cancel
                     </Link>
                     <button type="submit" className="black btn-flat right white-text">
@@ -90,7 +91,7 @@ class ClientForm extends Component {
                     className="Modal"
                     overlayClassName="Overlay"
                 >
-                    <EyeglassNew handleModalSubmit={this.handleCloseModal} isModal={true}/>
+                    <ClientNew handleModalSubmit={this.handleCloseModal} isModal={true}/>
                 </Modal>
             </div>
         );
@@ -108,10 +109,10 @@ function validate(values) {
     return errors;
 }
 
-ClientForm = connect(null, {getClient, getEyeglasses})(withRouter(ClientForm));
+ExaminationForm = connect(null, {getExamination, getClients})(withRouter(ExaminationForm));
 
 export default reduxForm({
     validate,
-    form: 'clientForm',
+    form: 'examinationForm',
     destroyOnUnmount: false
-})(ClientForm);
+})(ExaminationForm);

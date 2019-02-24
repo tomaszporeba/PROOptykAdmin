@@ -13,6 +13,7 @@ import {getEyeglasses, getInvoices, getExaminations, getClients} from "./actions
 import EyeglassNew from "./components/Eyeglasses/EyeglassNew";
 import ClientNew from "./components/Clients/ClientNew";
 import InvoiceNew from "./components/Invoices/InvoiceNew";
+import ExaminationNew from "./components/Examination/ExaminationNew";
 
 const eyeglassColumns =
     [{title: "Holder name", width: 2, sortKeyValue: "holder_name"},
@@ -88,6 +89,8 @@ class App extends Component {
                                 <PrivateRoute exact path="/invoice/new" component={InvoiceNew}/>
                                 <PrivateRoute exact path="/client/edit/:id" component={ClientNew}/>
                                 <PrivateRoute exact path="/client/new" component={ClientNew}/>
+                                <PrivateRoute exact path="/examination/edit/:id" component={ExaminationNew}/>
+                                <PrivateRoute exact path="/examination/new" component={ExaminationNew}/>
                             </div>
                         </div>
                     </div>

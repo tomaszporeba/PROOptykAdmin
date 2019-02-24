@@ -5,6 +5,6 @@ export default [
     {label: 'Left eye', name: 'leftEyeDefectOfVision', type: "string"},
     {label: 'Right eye', name: 'rightEyeDefectOfVision', type: "string"},
     {label: 'Eyeglass', name: 'eyeglassId', type: "select"},
-    {label: 'Order date', name: 'orderDate', type: "text"},
+    {label: 'Order date', name: 'orderDate', type: "date"},
     {label: 'Comments', name: 'comments', type: "text"},
 ];
