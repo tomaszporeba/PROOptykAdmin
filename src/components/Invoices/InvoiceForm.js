@@ -108,7 +108,7 @@ function validate(values) {
     return errors;
 }
 
-InvoiceForm = connect(null, {getInvoice, getClients})(withRouter(InvoiceForm));
+InvoiceForm = connect(null, {getInvoice})(withRouter(InvoiceForm));
 
 export default reduxForm({
     validate,

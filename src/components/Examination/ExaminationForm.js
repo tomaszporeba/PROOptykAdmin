@@ -103,7 +103,7 @@ function validate(values) {
     return errors;
 }
 
-ExaminationForm = connect(null, {getExamination, getClients})(withRouter(ExaminationForm));
+ExaminationForm = connect(null, {getExamination,})(withRouter(ExaminationForm));
 
 export default reduxForm({
     validate,

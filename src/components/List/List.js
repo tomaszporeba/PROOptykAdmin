@@ -146,7 +146,7 @@ class List extends React.Component {
         return (
             <div className="list-container">
                 <div className="list-items-container">
-                    <span>Eyeglass</span>
+                    <span>{window.location.pathname.replace('/','').toUpperCase()}</span>
                     <div className="list-items">
                         <div className="search-container">
                             <input placeholder="Search..." type="text" name="param"
@@ -177,7 +177,8 @@ class List extends React.Component {
 }
 
 const mapStateToProps= (state) => {
-    return {listItems: state.list.listItems}
+    return {listItems: state.list.listItems,
+            isLoading: state.list.isLoading}
 } ;
 
 
