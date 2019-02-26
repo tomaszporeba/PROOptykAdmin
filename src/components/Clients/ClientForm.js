@@ -99,7 +99,7 @@ function validate(values) {
     return errors;
 }
 
-ClientForm = connect(null, {getClient, getEyeglasses})(withRouter(ClientForm));
+ClientForm = connect(null, {getClient})(withRouter(ClientForm));
 
 export default reduxForm({
     validate,

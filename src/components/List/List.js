@@ -1,9 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import './list.css'
-import {getEyeglasses} from "../../actions";
 import {connect} from "react-redux";
+import {bindActionCreators} from 'redux';
 import _ from 'lodash';
+import * as listRequest from '../../creators/listCreator'
+import {getEyeglasses} from "../../actions";
+import {getListOfItems} from "../../creators/listCreator";
 
 const clickableItems = ['number', 'name', 'title', 'holder_name', 'lastName'];
 
@@ -94,11 +97,10 @@ class List extends React.Component {
         }
     }
 
-    async componentDidMount() {
-        let listItems = await this.props.requestType();
-        this.setState({
-            listItems
-        })
+     componentDidMount() {
+        let path = window.location.pathname;
+        this.props.getListItems(path, this.state.param);
+
     }
 
     sortArray(keyValue) {
@@ -131,16 +133,12 @@ class List extends React.Component {
     }
 
     renderRows() {
-        return (this.state.listItems.map((listItem) => <Row listItem={listItem}/>))
+        return (this.props.listItems.map((listItem) => <Row listItem={listItem}/>))
     }
 
     handleChange = (e) => {
-        let listItems;
         this.setState({param: e.target.value}, async () => {
-            listItems = await this.props.requestType(this.state.param);
-            this.setState({
-                listItems
-            })
+            this.props.getListItems(window.location.pathname, this.state.param)
         });
     };
 
@@ -178,6 +176,17 @@ class List extends React.Component {
     }
 }
 
-List = connect(null, {getEyeglasses})(List);
+const mapStateToProps= (state) => {
+    return {listItems: state.list.listItems}
+} ;
+
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getListItems: (path, sortType) => {dispatch(getListOfItems(path, sortType))}
+    }
+}
+
+List = connect(mapStateToProps, mapDispatchToProps)(List);
 
 export default List;

@@ -1,7 +1,6 @@
 import React from 'react';
 import './header.css';
 
-
 export default ({toggleSidebar}) => {
     const user = JSON.parse(localStorage.getItem('USER'));
     return (

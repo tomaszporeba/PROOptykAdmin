@@ -9,49 +9,12 @@ import Login from "./components/Login/Login";
 import './components/Dashboard/dashboard.css'
 import SideMenu from './components/utils/SideMenu/SideMenu'
 import Header from './components/Header/Header';
-import {getEyeglasses, getInvoices, getExaminations, getClients} from "./actions";
 import EyeglassNew from "./components/Eyeglasses/EyeglassNew";
 import ClientNew from "./components/Clients/ClientNew";
 import InvoiceNew from "./components/Invoices/InvoiceNew";
 import ExaminationNew from "./components/Examination/ExaminationNew";
+import * as headers from "./consts/headers"
 
-const eyeglassColumns =
-    [{title: "Holder name", width: 2, sortKeyValue: "holder_name"},
-        {title: "Purchase price", width: 2, sortKeyValue: "purchase_price"},
-        {title: "Price", width: 2, sortKeyValue: "price"},
-        {title: "Vat", width: 2, sortKeyValue: "vat"},
-        {title: "Availability", width: 2, sortKeyValue: "availability"},
-        {title: "Color", width: 2, sortKeyValue: "color"},
-        {title: "Size", width: 2, sortKeyValue: "size"},
-        {title: "Salon", width: 2, sortKeyValue: "salon"}]
-;
-
-const invoiceColumns = [{title: "Number", width: 2, sortKeyValue: "number"},
-    {title: "Amount", width: 2, sortKeyValue: "amount"},
-    {title: "Company", width: 2, sortKeyValue: "company"},
-    {title: "Product", width: 2, sortKeyValue: "product"},
-    {title: "Account Number", width: 2, sortKeyValue: "accountNumber"},
-    {title: "Client", width: 2, sortKeyValue:"clientId"}]
-;
-
-const examinationColumns = [{title: "Scheduled date", width: 2, sortKeyValue: "scheduledDate"},
-    {title: "Right eye", width: 2, sortKeyValue: "rightEye"},
-    {title: "Left eye", width: 2, sortKeyValue: "leftEye"},
-    {title: "Client", width:2, sortKeyValue:"client"}]
-;
-
-
-const clientColumns = [{title: "Name", width: 2, sortKeyValue: "name"},
-    {title: "Last name", width: 2, sortKeyValue: "lastName"},
-    {title: "Phone number", width: 2, sortKeyValue: "phoneNumber"},
-    {title: "Left eye", width: 2, sortKeyValue: "leftEyeDefectOfVision"},
-    {title: "Right eye", width: 2, sortKeyValue: "rightEyeDefectOfVision"},
-    {title: "Order date", width: 2, sortKeyValue: "orderDate"},
-    {title: "Comments", width: 2, sortKeyValue: "comments"},
-    {title: "Eyeglass", width: 2, sortKeyValue: "eyeglassId"},
-
-    ]
-;
 
 class App extends Component {
     constructor(props) {
@@ -64,6 +27,7 @@ class App extends Component {
     };
 
     render() {
+        const { getEyeglasses } = this.props;
         return (
             <BrowserRouter>
                 <div className="App">
@@ -75,13 +39,13 @@ class App extends Component {
                             <div className="main-container">
                                 <SideMenu isOpen={this.state.sidebarOpen}/>
                                 <PrivateRoute exact path="/dashboard" component={Dashboard}/>
-                                <PrivateRoute exact path="/eyeglass" columns={eyeglassColumns} requestType={this.props.getEyeglasses}
+                                <PrivateRoute exact path="/eyeglass" columns={headers.eyeglassColumns}
                                               component={List}/>
-                                <PrivateRoute exact path="/invoice" columns={invoiceColumns} requestType={this.props.getInvoices}
+                                <PrivateRoute exact path="/invoice" columns={headers.invoiceColumns}
                                               component={List}/>
-                                <PrivateRoute exact path="/examination" columns={examinationColumns} requestType={this.props.getExaminations}
+                                <PrivateRoute exact path="/examination" columns={headers.examinationColumns}
                                               component={List}/>
-                                <PrivateRoute exact path="/client" columns={clientColumns} requestType={this.props.getClients}
+                                <PrivateRoute exact path="/client" columns={headers.clientColumns}
                                               component={List}/>
                                 <PrivateRoute exact path="/eyeglass/edit/:id" component={EyeglassNew}/>
                                 <PrivateRoute exact path="/eyeglass/new" component={EyeglassNew}/>
@@ -101,5 +65,8 @@ class App extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {isSidebarOpen: state.isSidebarOpen}
+};
 
-export default connect(null, {getEyeglasses, getInvoices, getExaminations, getClients})(App);
+export default connect(mapStateToProps, null)(App);

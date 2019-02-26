@@ -1,6 +1,5 @@
 import axios from 'axios';
 import {AUTHENTICATED_REQUEST, FETCH_USER} from "./types";
-// import apiServices from '../apiServices';
 
 
 export const fetchUser = (values, history) => async dispatch => {
@@ -11,33 +10,9 @@ export const fetchUser = (values, history) => async dispatch => {
     }
 };
 
-export const getEyeglasses = (param) => async dispatch => {
-    dispatch({type: AUTHENTICATED_REQUEST});
-    const res = await axios.get("http://localhost:8000/api/eyeglass", {params:{search: param}});
-    return res.data;
-};
-
 export const getEyeglass = (param) => async dispatch => {
     dispatch({type: AUTHENTICATED_REQUEST});
     const res = await axios.get(`http://localhost:8000/api/eyeglass/${param}`, );
-    return res.data;
-};
-
-export const getInvoices = (param) => async dispatch => {
-    dispatch({type: AUTHENTICATED_REQUEST});
-    const res = await axios.get("http://localhost:8000/api/invoice", {params:{search: param}});
-    return res.data;
-};
-
-export const getExaminations = (param) => async dispatch => {
-    dispatch({type: AUTHENTICATED_REQUEST});
-    const res = await axios.get("http://localhost:8000/api/examination", {params:{search: param}});
-    return res.data;
-};
-
-export const getClients = (param) => async dispatch => {
-    dispatch({type: AUTHENTICATED_REQUEST});
-    const res = await axios.get("http://localhost:8000/api/client", {params:{search: param}});
     return res.data;
 };
 
