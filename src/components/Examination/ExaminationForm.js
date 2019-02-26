@@ -2,14 +2,13 @@ import React, {Component} from 'react';
 import _ from 'lodash';
 import {reduxForm, Field, initialize} from 'redux-form';
 import {connect} from "react-redux";
-import {getExamination, getClients} from "../../actions";
 import {Link, withRouter} from 'react-router-dom';
 import InputField from "../utils/InputField";
 import formFields from './formFields';
 import DropDownSelect from "../utils/DropDownSelect/DropDownSelect";
-import Modal from 'react-modal';
-import ClientNew from "./../Clients/ClientNew";
 import ModalHelper from "../utils/Modal/ModalHelper";
+import {getListOfItems} from "../../creators/listCreator";
+import {getSingleItem} from "../../creators/formCreator";
 
 
 class ExaminationForm extends Component {
@@ -28,38 +27,29 @@ class ExaminationForm extends Component {
     }
 
     handleCloseModal() {
-        this.getClients();
+        this.props.getListItems('/client','');
         this.setState({showModal: false});
     }
     componentDidMount() {
-        this.getClients();
-        this.handleInitialize();
+        this.props.getListItems('/client','');
+        let path = window.location.pathname.split('/');
+        this.props.getItem(`${path[1]}/${path[3]}`);
+        this.handleInitialize(this.props.singleItem);
     }
 
-    getClients = async () => {
-        let clients = await this.props.getClients();
-        clients = clients.map((client) => {
-            client.label = `${client.name} ${client.lastName}`;
-            return client
-        });
-        this.setState({clients});
-    };
-
-    async handleInitialize() {
-        const examination = await this.props.getExamination(window.location.pathname.split("/").pop());
-        this.props.initialize(examination);
+    async handleInitialize(item) {
+        this.props.initialize(item);
     }
 
     renderFields() {
         return _.map(formFields, ({label, name, type}) => {
-            console.log(type);
             if (type === "select") {
                 return (<Field
                     name="clientId"
                     label="Client"
                     component={DropDownSelect}
                     handleOpenModal={() => this.handleOpenModal()}
-                    options={this.state.clients}
+                    options={this.props.listItems.map(client => {client.label = `${client.name} ${client.lastName}`; return client})}
                 />)
             } else {
                 return <Field
@@ -103,10 +93,28 @@ function validate(values) {
     return errors;
 }
 
-ExaminationForm = connect(null, {getExamination,})(withRouter(ExaminationForm));
+const mapStateToProps= (state) => {
+    console.log(state);
+    return {listItems: state.list.listItems,
+        initialValues: state.formInput.singleItem,
+        isLoading: state.list.isLoading}
+} ;
 
-export default reduxForm({
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getListItems: (path, sortType) => {dispatch(getListOfItems(path, sortType))},
+        getItem: (path) => {dispatch(getSingleItem(path))}
+    }
+}
+
+
+ExaminationForm = reduxForm({
     validate,
     form: 'examinationForm',
     destroyOnUnmount: false
 })(ExaminationForm);
+
+ExaminationForm = connect(mapStateToProps, mapDispatchToProps)(withRouter(ExaminationForm));
+
+export default ExaminationForm;
