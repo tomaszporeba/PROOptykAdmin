@@ -1,6 +1,6 @@
 
 
-const initialState = {listItems: [], isLoading: false};
+const initialState = {listItems: [], isLoading: null};
 
 export default function (state = initialState, action) {
     switch (action.type) {

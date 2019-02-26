@@ -15,7 +15,6 @@ class ModalHelper extends Component {
 
     componentWillReceiveProps(newProps) {
         if (this.props !== newProps){
-            console.log("new props");
             this.setState({showModal: newProps.isOpen})
         }
     }

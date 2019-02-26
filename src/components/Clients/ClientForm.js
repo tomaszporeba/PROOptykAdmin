@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import _ from 'lodash';
 import {reduxForm, Field, initialize} from 'redux-form';
 import {connect} from "react-redux";
-import {getClient, getEyeglasses} from "../../actions";
+import {getClient} from "../../actions";
 import {Link, withRouter} from 'react-router-dom';
 import InputField from "../utils/InputField";
 import formFields from './formFields';
 import DropDownSelect from "../utils/DropDownSelect/DropDownSelect";
 import ModalHelper from "../utils/Modal/ModalHelper";
+import {getListOfItems} from "../../creators/listCreator";
 
 class ClientForm extends Component {
     constructor(props) {
@@ -25,22 +26,14 @@ class ClientForm extends Component {
     }
 
     handleCloseModal() {
-        this.getEyeglasses();
+        this.props.getListItems('/eyeglass', '');
         this.setState({showModal: false});
     }
     componentDidMount() {
-        this.getEyeglasses();
+        this.props.getListItems('/eyeglass','');
         this.handleInitialize();
     }
 
-    getEyeglasses = async () => {
-        let eyeglasses = await this.props.getEyeglasses();
-        eyeglasses = eyeglasses.map((eyeglass) => {
-            eyeglass.label = `${eyeglass.holder_name}`;
-            return eyeglass
-        });
-        this.setState({eyeglasses});
-    };
 
     async handleInitialize() {
         const eyeglass = await this.props.getClient(window.location.pathname.split("/").pop());
@@ -55,7 +48,7 @@ class ClientForm extends Component {
                     label="Eyeglass"
                     component={DropDownSelect}
                     handleOpenModal={() => this.handleOpenModal()}
-                    options={this.state.eyeglasses}
+                    options={this.props.listItems.map(eyeglass => {eyeglass.label = `${eyeglass.holder_name}`; return eyeglass})}
                 />)
             } else {
                 return <Field
@@ -99,7 +92,20 @@ function validate(values) {
     return errors;
 }
 
-ClientForm = connect(null, {getClient})(withRouter(ClientForm));
+const mapStateToProps= (state) => {
+    return {listItems: state.list.listItems,
+        isLoading: state.list.isLoading}
+} ;
+
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getListItems: (path, sortType) => {dispatch(getListOfItems(path, sortType))},
+        getClient
+    }
+}
+
+ClientForm = connect(mapStateToProps, mapDispatchToProps)(withRouter(ClientForm));
 
 export default reduxForm({
     validate,

@@ -4,6 +4,7 @@ import axios from "axios/index";
 
 export function getListOfItems(path, param) {
     return async function(dispatch) {
+        console.log(path);
         dispatch({type: AUTHENTICATED_REQUEST});
         dispatch(getListOfItemsStart("LIST_REQUEST_BEGIN"));
         return axios.get(`http://localhost:8000/api${path}`, {params:{search: param}}).then((response) => {
@@ -19,7 +20,6 @@ function getListOfItemsStart(type) {
 }
 
 export function getListOfItemsSuccess(type,items) {
-    console.log(items);
     return {
         type,
         items

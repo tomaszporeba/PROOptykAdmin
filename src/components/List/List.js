@@ -2,9 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import './list.css'
 import {connect} from "react-redux";
-import {bindActionCreators} from 'redux';
 import _ from 'lodash';
-import * as listRequest from '../../creators/listCreator'
 import {getEyeglasses} from "../../actions";
 import {getListOfItems} from "../../creators/listCreator";
 

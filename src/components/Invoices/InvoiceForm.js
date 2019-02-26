@@ -2,13 +2,14 @@ import React, {Component} from 'react';
 import _ from 'lodash';
 import {reduxForm, Field, initialize} from 'redux-form';
 import {connect} from "react-redux";
-import {getInvoice, getClients} from "../../actions";
+import {getInvoice, getClients, getClient} from "../../actions";
 import {Link, withRouter} from 'react-router-dom';
 import InputField from "../utils/InputField";
 import DropDownSelect from "../utils/DropDownSelect/DropDownSelect";
 import formFields from './formFields';
 import './../utils/DropDownSelect/dropDownSelect.css'
 import ModalHelper from "../utils/Modal/ModalHelper";
+import {getListOfItems} from "../../creators/listCreator";
 
 class InvoiceForm extends Component {
     constructor(props) {
@@ -27,21 +28,12 @@ class InvoiceForm extends Component {
     }
 
     handleCloseModal() {
-        this.getClients();
+        this.props.getListItems('/client','');
         this.setState({showModal: false});
     }
 
-    getClients = async () => {
-        let clients = await this.props.getClients();
-        clients = clients.map((client) => {
-            client.label = `${client.name} ${client.lastName}`;
-            return client
-        });
-        this.setState({clients});
-    };
-
     componentDidMount() {
-        this.getClients();
+        this.props.getListItems('/client','');
         this.handleInitialize();
 
     }
@@ -60,7 +52,7 @@ class InvoiceForm extends Component {
                     label="Client"
                     component={DropDownSelect}
                     handleOpenModal={() => this.handleOpenModal()}
-                    options={this.state.clients}
+                    options={this.props.listItems.map(client => {client.label = `${client.name} ${client.lastName}`; return client})}
                 />)
             } else {
                 return <Field
@@ -108,7 +100,21 @@ function validate(values) {
     return errors;
 }
 
-InvoiceForm = connect(null, {getInvoice})(withRouter(InvoiceForm));
+const mapStateToProps= (state) => {
+    return {listItems: state.list.listItems,
+        isLoading: state.list.isLoading}
+} ;
+
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getListItems: (path, sortType) => {dispatch(getListOfItems(path, sortType))},
+        getInvoice
+    }
+}
+
+
+InvoiceForm = connect(mapStateToProps, mapDispatchToProps)(withRouter(InvoiceForm));
 
 export default reduxForm({
     validate,
