@@ -5,9 +5,6 @@ import _ from 'lodash';
 import { withRouter } from 'react-router-dom';
 import {saveEyeglass} from "../../actions";
 
-
-
-
 class EyeglassReview extends Component {
 
 
@@ -17,7 +14,7 @@ class EyeglassReview extends Component {
             this.props.handleModalSubmit()
 
         } else {
-            this.props.history.push("/client")
+            this.props.history.push("/eyeglass")
         }
 
     };

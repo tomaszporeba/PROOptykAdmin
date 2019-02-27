@@ -63,12 +63,10 @@ function validate(values) {
 }
 
 const mapStateToProps= (state) => {
-    console.log(state);
     return {listItems: state.list.listItems,
         initialValues: state.formInput.singleItem,
         isLoading: state.list.isLoading}
 } ;
-
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -77,10 +75,9 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-
 EyeglassForm = reduxForm({
     validate,
-    form: 'clientForm',
+    form: 'eyeglassForm',
     destroyOnUnmount: false
 })(EyeglassForm);
 

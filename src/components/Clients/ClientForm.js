@@ -35,7 +35,6 @@ class ClientForm extends Component {
         let path = window.location.pathname.split('/');
         this.props.getItem(`${path[1]}/${path[3]}`);
         this.props.initialize(this.props.singleItem);
-
     }
 
     renderFields() {
@@ -44,6 +43,7 @@ class ClientForm extends Component {
                 return (<Field
                     name="eyeglassId"
                     label="Eyeglass"
+                    defaultValue={this.props.initialValues.eyeglassId}
                     component={DropDownSelect}
                     handleOpenModal={() => this.handleOpenModal()}
                     options={this.props.listItems.map(eyeglass => {eyeglass.label = `${eyeglass.holder_name}`; return eyeglass})}
@@ -91,7 +91,6 @@ function validate(values) {
 }
 
 const mapStateToProps= (state) => {
-    console.log(state);
     return {listItems: state.list.listItems,
         initialValues: state.formInput.singleItem,
         isLoading: state.list.isLoading}
@@ -104,7 +103,6 @@ function mapDispatchToProps(dispatch) {
         getItem: (path) => {dispatch(getSingleItem(path))}
     }
 }
-
 
 ClientForm = reduxForm({
     validate,

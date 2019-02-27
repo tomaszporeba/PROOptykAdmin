@@ -47,6 +47,7 @@ class InvoiceForm extends Component {
                 return (<Field
                     name="clientId"
                     label="Client"
+                    defaultValue={this.props.initialValues.clientId}
                     component={DropDownSelect}
                     handleOpenModal={() => this.handleOpenModal()}
                     options={this.props.listItems.map(client => {client.label = `${client.name} ${client.lastName}`; return client})}
@@ -59,7 +60,6 @@ class InvoiceForm extends Component {
                     label={label}
                     name={name}/>
             }
-
         })
     }
 
@@ -98,7 +98,6 @@ function validate(values) {
 }
 
 const mapStateToProps= (state) => {
-    console.log(state);
     return {listItems: state.list.listItems,
         initialValues: state.formInput.singleItem,
         isLoading: state.list.isLoading}

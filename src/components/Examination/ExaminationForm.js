@@ -19,7 +19,6 @@ class ExaminationForm extends Component {
             clients: []
         };
         this.handleCloseModal = this.handleCloseModal.bind(this);
-
     }
 
     handleOpenModal() {
@@ -43,6 +42,7 @@ class ExaminationForm extends Component {
                 return (<Field
                     name="clientId"
                     label="Client"
+                    defaultValue={this.props.initialValues.clientId}
                     component={DropDownSelect}
                     handleOpenModal={() => this.handleOpenModal()}
                     options={this.props.listItems.map(client => {client.label = `${client.name} ${client.lastName}`; return client})}
@@ -90,7 +90,6 @@ function validate(values) {
 }
 
 const mapStateToProps= (state) => {
-    console.log(state);
     return {listItems: state.list.listItems,
         initialValues: state.formInput.singleItem,
         isLoading: state.list.isLoading}
@@ -103,7 +102,6 @@ function mapDispatchToProps(dispatch) {
         getItem: (path) => {dispatch(getSingleItem(path))}
     }
 }
-
 
 ExaminationForm = reduxForm({
     validate,

@@ -12,12 +12,12 @@ class InvoiceReview extends Component {
 
 
     handleSubmit = async () => {
-        await this.props.saveClient(this.props.formValues);
+        await this.props.saveInvoice(this.props.formValues);
         if (this.props.isModal) {
             this.props.handleModalSubmit()
 
         } else {
-            this.props.history.push("/client")
+            this.props.history.push("/invoice")
         }
 
     };
