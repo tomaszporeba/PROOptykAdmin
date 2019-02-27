@@ -34,11 +34,7 @@ class ExaminationForm extends Component {
         this.props.getListItems('/client','');
         let path = window.location.pathname.split('/');
         this.props.getItem(`${path[1]}/${path[3]}`);
-        this.handleInitialize(this.props.singleItem);
-    }
-
-    async handleInitialize(item) {
-        this.props.initialize(item);
+        this.props.initialize(this.props.singleItem);
     }
 
     renderFields() {

@@ -9,6 +9,7 @@ import formFields from './formFields';
 import DropDownSelect from "../utils/DropDownSelect/DropDownSelect";
 import ModalHelper from "../utils/Modal/ModalHelper";
 import {getListOfItems} from "../../creators/listCreator";
+import {getSingleItem} from "../../creators/formCreator";
 
 class ClientForm extends Component {
     constructor(props) {
@@ -31,13 +32,10 @@ class ClientForm extends Component {
     }
     componentDidMount() {
         this.props.getListItems('/eyeglass','');
-        this.handleInitialize();
-    }
+        let path = window.location.pathname.split('/');
+        this.props.getItem(`${path[1]}/${path[3]}`);
+        this.props.initialize(this.props.singleItem);
 
-
-    async handleInitialize() {
-        const eyeglass = await this.props.getClient(window.location.pathname.split("/").pop());
-        this.props.initialize(eyeglass);
     }
 
     renderFields() {
@@ -93,7 +91,9 @@ function validate(values) {
 }
 
 const mapStateToProps= (state) => {
+    console.log(state);
     return {listItems: state.list.listItems,
+        initialValues: state.formInput.singleItem,
         isLoading: state.list.isLoading}
 } ;
 
@@ -101,14 +101,17 @@ const mapStateToProps= (state) => {
 function mapDispatchToProps(dispatch) {
     return {
         getListItems: (path, sortType) => {dispatch(getListOfItems(path, sortType))},
-        getClient
+        getItem: (path) => {dispatch(getSingleItem(path))}
     }
 }
 
-ClientForm = connect(mapStateToProps, mapDispatchToProps)(withRouter(ClientForm));
 
-export default reduxForm({
+ClientForm = reduxForm({
     validate,
     form: 'clientForm',
     destroyOnUnmount: false
 })(ClientForm);
+
+ClientForm = connect(mapStateToProps, mapDispatchToProps)(withRouter(ClientForm));
+
+export default ClientForm;

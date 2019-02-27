@@ -6,18 +6,16 @@ import {getEyeglass} from "../../actions";
 import {Link, withRouter} from 'react-router-dom';
 import EyeglassField from "../utils/InputField";
 import formFields from './formFields';
+import {getListOfItems} from "../../creators/listCreator";
+import {getSingleItem} from "../../creators/formCreator";
 
 class EyeglassForm extends Component {
 
 
     componentDidMount() {
-        this.handleInitialize();
-    }
-
-
-    async handleInitialize() {
-        const eyeglass = await this.props.getEyeglass(window.location.pathname.split("/").pop());
-        this.props.initialize(eyeglass);
+        let path = window.location.pathname.split('/');
+        this.props.getItem(`${path[1]}/${path[3]}`);
+        this.props.initialize(this.props.singleItem);
     }
 
     renderFields() {
@@ -64,10 +62,28 @@ function validate(values) {
     return errors;
 }
 
-EyeglassForm = connect(null, {getEyeglass})(withRouter(EyeglassForm));
+const mapStateToProps= (state) => {
+    console.log(state);
+    return {listItems: state.list.listItems,
+        initialValues: state.formInput.singleItem,
+        isLoading: state.list.isLoading}
+} ;
 
-export default reduxForm({
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getListItems: (path, sortType) => {dispatch(getListOfItems(path, sortType))},
+        getItem: (path) => {dispatch(getSingleItem(path))}
+    }
+}
+
+
+EyeglassForm = reduxForm({
     validate,
-    form: 'eyeglassForm',
+    form: 'clientForm',
     destroyOnUnmount: false
 })(EyeglassForm);
+
+EyeglassForm = connect(mapStateToProps, mapDispatchToProps)(withRouter(EyeglassForm));
+
+export default EyeglassForm;

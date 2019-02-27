@@ -10,6 +10,7 @@ import formFields from './formFields';
 import './../utils/DropDownSelect/dropDownSelect.css'
 import ModalHelper from "../utils/Modal/ModalHelper";
 import {getListOfItems} from "../../creators/listCreator";
+import {getSingleItem} from "../../creators/formCreator";
 
 class InvoiceForm extends Component {
     constructor(props) {
@@ -34,13 +35,9 @@ class InvoiceForm extends Component {
 
     componentDidMount() {
         this.props.getListItems('/client','');
-        this.handleInitialize();
-
-    }
-
-    async handleInitialize() {
-        const invoice = await this.props.getInvoice(window.location.pathname.split("/").pop());
-        this.props.initialize(invoice);
+        let path = window.location.pathname.split('/');
+        this.props.getItem(`${path[1]}/${path[3]}`);
+        this.props.initialize(this.props.singleItem);
     }
 
 
@@ -101,7 +98,9 @@ function validate(values) {
 }
 
 const mapStateToProps= (state) => {
+    console.log(state);
     return {listItems: state.list.listItems,
+        initialValues: state.formInput.singleItem,
         isLoading: state.list.isLoading}
 } ;
 
@@ -109,16 +108,17 @@ const mapStateToProps= (state) => {
 function mapDispatchToProps(dispatch) {
     return {
         getListItems: (path, sortType) => {dispatch(getListOfItems(path, sortType))},
-        getInvoice
+        getItem: (path) => {dispatch(getSingleItem(path))}
     }
 }
 
 
-InvoiceForm = connect(mapStateToProps, mapDispatchToProps)(withRouter(InvoiceForm));
-
-export default reduxForm({
+InvoiceForm = reduxForm({
     validate,
-    touchOnBlur: false,
     form: 'invoiceForm',
     destroyOnUnmount: false
 })(InvoiceForm);
+
+InvoiceForm = connect(mapStateToProps, mapDispatchToProps)(withRouter(InvoiceForm));
+
+export default InvoiceForm;
