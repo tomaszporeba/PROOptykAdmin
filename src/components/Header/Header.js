@@ -6,8 +6,7 @@ export default ({toggleSidebar}) => {
     return (
         <div className="header-container">
             <i onClick={toggleSidebar} className="small material-icons burger-icon">menu</i>
-
-            {/*<span>{`${user.firstName} ${user.lastName}`}</span>*/}
+            <span>{`${user.firstName} ${user.lastName}`}</span>
         </div>
     );
 }
