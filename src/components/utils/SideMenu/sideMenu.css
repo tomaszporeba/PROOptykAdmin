@@ -1,35 +1,105 @@
 .side-menu-container {
-    background-color: #2c3034;
-    -webkit-transition:width .07s linear;
-    transition:width .07s linear;
-    -webkit-transform:translateZ(0) scale(1,1);
-    height: 100%;
-}
-
-.sidebar-open {
-    width: 300px !important;
-}
-
-.sidebar-closed {
-    width: 50px !important;
-}
-.top-image {
-    background-color: red;
-    height: 30%;
-}
-
-.menu-item {
+    position: absolute;
+    background-color: rgb(46, 46, 46);
+    height: calc(100% - 56px);
     display: flex;
-    align-items: center;
-    height: 7%;
-    border-bottom: 1px solid white;
+    width: 80%!important;
+    flex-wrap: wrap;
+    margin: 0;
+    border: none;
 }
 
-.menu-item i {
-    padding-left: 12px;
+.side-menu-container ul {
+    margin-top: 20%;
+    list-style-type: none;
 }
 
-.menu-item span  {
-    height: auto;
-    padding-left: 30px;
+.side-menu-container li {
+    border-bottom: 1px white;
+    display: flex;
+    width: 100%;
+    flex-basis: 100%;
+    transform: translateX(-100%);
+}
+
+.side-menu-container i {
+    margin-right: 10px;
+}
+
+.side-menu-container a {
+    display: flex;
+}
+
+.side-menu-container span {
+    font-size: 2rem;
+}
+
+
+.sidebar-closed, .sidebar-closed li {
+    transform: translateX(-100%);
+    transition: .4s ease-in-out;
+}
+.sidebar-closed {
+    transition-delay: .4s;
+}
+
+.sidebar-open, .sidebar-open li {
+    transform: translateX(0%);
+    transition: .4s transform ease-in-out;
+}
+
+
+.sidebar-closed li:first-child {
+    transition-delay: .4s;
+}
+
+.sidebar-closed li:nth-child(2) {
+    transition-delay: .3s;
+}
+
+.sidebar-closed li:nth-child(3) {
+    transition-delay: .2s;
+}
+
+.sidebar-closed li:nth-child(4) {
+    transition-delay: .1s;
+}
+
+.sidebar-open li:nth-child(2) {
+    transition-delay: .1s;
+}
+
+.sidebar-open li:nth-child(3) {
+    transition-delay: .2s;
+}
+
+.sidebar-open li:nth-child(4) {
+    transition-delay: .3s;
+}
+.sidebar-open li:nth-child(5) {
+    transition-delay: .4s;
+}
+
+
+
+@media screen and (min-width:600px) {
+    .side-menu-container {
+        background-color: #2c3034;
+        -webkit-transition:width .07s linear;
+        transition:width .07s linear;
+        -webkit-transform:translateZ(0) scale(1,1);
+        height: 100%;
+    }
+
+    .sidebar-open {
+        width: 300px !important;
+    }
+
+    .sidebar-closed {
+        width: 50px !important;
+    }
+    .top-image {
+        background-color: red;
+        height: 30%;
+    }
 }

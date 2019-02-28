@@ -11,16 +11,16 @@ const MENU_FIELDS = [
     {title: "Examinations", icon: "insert_invitation", path: "examination"}
 ];
 
-const SideMenu = ({isOpen, toggleSidebar}) => {
+const SideMenu = ({isOpen}) => {
     let sidebarClass = isOpen ? 'sidebar-open side-menu-container' : 'sidebar-closed side-menu-container';
     return (
         <nav className={sidebarClass}>
-            <div className="top-image">
-            </div>
+            <ul>
             {MENU_FIELDS.map(field => (
                 <MenuItem key={field.title} isOpen={isOpen} title={field.title} icon={field.icon} path={field.path}/>
                 )
             )}
+            </ul>
         </nav>
     );
 };

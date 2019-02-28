@@ -41,12 +41,12 @@ class App extends Component {
                                 <PrivateRoute exact path="/dashboard" component={Dashboard}/>
                                 <PrivateRoute exact path="/eyeglass" columns={headers.eyeglassColumns}
                                               component={List}/>
-                                <PrivateRoute exact path="/invoice" columns={headers.invoiceColumns}
-                                              component={List}/>
-                                <PrivateRoute exact path="/examination" columns={headers.examinationColumns}
-                                              component={List}/>
-                                <PrivateRoute exact path="/client" columns={headers.clientColumns}
-                                              component={List}/>
+                                {/*<PrivateRoute exact path="/invoice" columns={headers.invoiceColumns}*/}
+                                              {/*component={List}/>*/}
+                                {/*<PrivateRoute exact path="/examination" columns={headers.examinationColumns}*/}
+                                              {/*component={List}/>*/}
+                                {/*<PrivateRoute exact path="/client" columns={headers.clientColumns}*/}
+                                              {/*component={List}/>*/}
                                 <PrivateRoute exact path="/eyeglass/edit/:id" component={EyeglassNew}/>
                                 <PrivateRoute exact path="/eyeglass/new" component={EyeglassNew}/>
                                 <PrivateRoute exact path="/invoice/edit/:id" component={InvoiceNew}/>
