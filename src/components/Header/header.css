@@ -1,5 +1,5 @@
 
-.header-container {
+.header {
     display: flex;
     background-color: #15191d;
     height: 56px;
@@ -14,7 +14,7 @@
     padding-left: 10px;
     color: white;
 }
-.header-container span {
+.header span {
     padding-right: 10px;
     font-size: large;
     color: white;

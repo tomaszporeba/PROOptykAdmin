@@ -27,38 +27,30 @@ class App extends Component {
     };
 
     render() {
-        const { getEyeglasses } = this.props;
         return (
             <BrowserRouter>
                 <div className="App">
                     <Route exact path="/" component={Dashboard}/>
                     <Route exact path="/login" component={Login}/>
-                    <div className="dashboard-container">
-                        <div className="dashboard">
-                            <Header toggleSidebar={this.handleViewSidebar}/>
-                            <div className="main-container">
-                                <SideMenu isOpen={this.state.sidebarOpen}/>
-                                <PrivateRoute exact path="/dashboard" component={Dashboard}/>
-                                <PrivateRoute exact path="/eyeglass" columns={headers.eyeglassColumns}
-                                              component={List}/>
-                                {/*<PrivateRoute exact path="/invoice" columns={headers.invoiceColumns}*/}
-                                              {/*component={List}/>*/}
-                                {/*<PrivateRoute exact path="/examination" columns={headers.examinationColumns}*/}
-                                              {/*component={List}/>*/}
-                                {/*<PrivateRoute exact path="/client" columns={headers.clientColumns}*/}
-                                              {/*component={List}/>*/}
-                                <PrivateRoute exact path="/eyeglass/edit/:id" component={EyeglassNew}/>
-                                <PrivateRoute exact path="/eyeglass/new" component={EyeglassNew}/>
-                                <PrivateRoute exact path="/invoice/edit/:id" component={InvoiceNew}/>
-                                <PrivateRoute exact path="/invoice/new" component={InvoiceNew}/>
-                                <PrivateRoute exact path="/client/edit/:id" component={ClientNew}/>
-                                <PrivateRoute exact path="/client/new" component={ClientNew}/>
-                                <PrivateRoute exact path="/examination/edit/:id" component={ExaminationNew}/>
-                                <PrivateRoute exact path="/examination/new" component={ExaminationNew}/>
-                            </div>
-                        </div>
-                    </div>
-
+                    <Header toggleSidebar={this.handleViewSidebar}/>
+                    <SideMenu isOpen={this.state.sidebarOpen}/>
+                    <PrivateRoute exact path="/dashboard" component={Dashboard}/>
+                    <PrivateRoute exact path="/eyeglass" columns={headers.eyeglassColumns}
+                                  component={List}/>
+                    <PrivateRoute exact path="/invoice" columns={headers.invoiceColumns}
+                                  component={List}/>
+                    <PrivateRoute exact path="/examination" columns={headers.examinationColumns}
+                                  component={List}/>
+                    <PrivateRoute exact path="/client" columns={headers.clientColumns}
+                                  component={List}/>
+                    <PrivateRoute exact path="/eyeglass/edit/:id" component={EyeglassNew}/>
+                    <PrivateRoute exact path="/eyeglass/new" component={EyeglassNew}/>
+                    <PrivateRoute exact path="/invoice/edit/:id" component={InvoiceNew}/>
+                    <PrivateRoute exact path="/invoice/new" component={InvoiceNew}/>
+                    <PrivateRoute exact path="/client/edit/:id" component={ClientNew}/>
+                    <PrivateRoute exact path="/client/new" component={ClientNew}/>
+                    <PrivateRoute exact path="/examination/edit/:id" component={ExaminationNew}/>
+                    <PrivateRoute exact path="/examination/new" component={ExaminationNew}/>
                 </div>
             </BrowserRouter>
         );

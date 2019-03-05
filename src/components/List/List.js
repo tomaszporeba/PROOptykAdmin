@@ -24,7 +24,7 @@ class Row extends React.Component {
 
     render() {
         let listItem = this.props.listItem;
-        let listItemClass = this.state.isClicked ? "" : "list-item-class";
+        let listItemClass = this.state.isClicked ? "list-item-class-shrink" : "list-item-class-expand";
         let editPath = `${window.location.pathname}/edit/${listItem.id}`;
         let deletePath = `${window.location.pathname}/delete/${listItem.id}`;
         return (
@@ -33,21 +33,16 @@ class Row extends React.Component {
                 this.setState({isClicked: !this.state.isClicked});
             }}>
                 <div className="fields-container">
-
                     <Fields listItem={listItem}/>
                 </div>
-                {this.state.isClicked ? '' : <div className="button-container">
-                    <Link to={editPath}>
-                        <div className="edit-button">
-                            Edit
-                        </div>
+                <div>
+                    <Link style={{color:"white"}} to={editPath}>
+                        <i className="small material-icons">edit</i>
                     </Link>
-                    <Link to={deletePath}>
-                        <div className="edit-button">
-                            Del
-                        </div>
+                    <Link style={{color:"white"}} to={deletePath}>
+                        <i className="small material-icons">delete</i>
                     </Link>
-                </div>}
+                </div>
             </tr>);
     }
 
@@ -95,7 +90,7 @@ class List extends React.Component {
         }
     }
 
-     componentDidMount() {
+    componentDidMount() {
         let path = window.location.pathname;
         this.props.getListItems(path, this.state.param);
 
@@ -142,31 +137,29 @@ class List extends React.Component {
 
     render() {
         return (
-            <div className="list-container">
-                <div className="list-items-container">
-                    <span>{window.location.pathname.replace('/','').toUpperCase()}</span>
-                    <div className="list-items">
-                        <div className="search-container">
-                            <input placeholder="Search..." type="text" name="param"
-                                   onChange={this.debounceEvent(this.handleChange, 700)}/>
-                        </div>
-                        <table className="table-container">
-                            <thead>
-                            <tr>
-                                {this.renderHeader()}
-                            </tr>
-                            </thead>
-                            <tbody>
+            <div className="list-items-container">
+                <span>{window.location.pathname.replace('/', '').toUpperCase()}</span>
+                <div className="list-items">
+                    <div className="search-container">
+                        <input placeholder="Search..." type="text" name="param"
+                               onChange={this.debounceEvent(this.handleChange, 700)}/>
+                    </div>
+                    <table className="table-container">
+                        <thead>
+                        <tr>
+                            {this.renderHeader()}
+                        </tr>
+                        </thead>
+                        <tbody>
 
-                            {this.renderRows()}
+                        {this.renderRows()}
 
-                            </tbody>
-                        </table>
-                        <div className="fixed-action-btn">
-                            <Link to="eyeglass/new" className="btn-floating btn-medium black">
-                                <i className="medium material-icons">add</i>
-                            </Link>
-                        </div>
+                        </tbody>
+                    </table>
+                    <div className="fixed-action-btn">
+                        <Link to="eyeglass/new" className="btn-floating btn-medium black">
+                            <i className="medium material-icons">add</i>
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -174,15 +167,19 @@ class List extends React.Component {
     }
 }
 
-const mapStateToProps= (state) => {
-    return {listItems: state.list.listItems,
-            isLoading: state.list.isLoading}
-} ;
+const mapStateToProps = (state) => {
+    return {
+        listItems: state.list.listItems,
+        isLoading: state.list.isLoading
+    }
+};
 
 
 function mapDispatchToProps(dispatch) {
     return {
-        getListItems: (path, sortType) => {dispatch(getListOfItems(path, sortType))}
+        getListItems: (path, sortType) => {
+            dispatch(getListOfItems(path, sortType))
+        }
     }
 }
 

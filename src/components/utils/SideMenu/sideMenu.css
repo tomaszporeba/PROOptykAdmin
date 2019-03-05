@@ -7,6 +7,7 @@
     flex-wrap: wrap;
     margin: 0;
     border: none;
+    z-index: 10;
 }
 
 .side-menu-container ul {
