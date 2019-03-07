@@ -33,7 +33,7 @@ class App extends Component {
                     <Route exact path="/" component={Dashboard}/>
                     <Route exact path="/login" component={Login}/>
                     <Header toggleSidebar={this.handleViewSidebar}/>
-                    <SideMenu isOpen={this.state.sidebarOpen}/>
+                    <SideMenu toggleSidebar={this.handleViewSidebar} isOpen={this.state.sidebarOpen}/>
                     <PrivateRoute exact path="/dashboard" component={Dashboard}/>
                     <PrivateRoute exact path="/eyeglass" columns={headers.eyeglassColumns}
                                   component={List}/>

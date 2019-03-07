@@ -11,13 +11,14 @@ const MENU_FIELDS = [
     {title: "Examinations", icon: "insert_invitation", path: "examination"}
 ];
 
-const SideMenu = ({isOpen}) => {
+const SideMenu = ({isOpen, toggleSidebar}) => {
+
     let sidebarClass = isOpen ? 'sidebar-open side-menu-container' : 'sidebar-closed side-menu-container';
     return (
         <nav className={sidebarClass}>
             <ul>
             {MENU_FIELDS.map(field => (
-                <MenuItem key={field.title} isOpen={isOpen} title={field.title} icon={field.icon} path={field.path}/>
+                <MenuItem toggleSidebar={toggleSidebar} key={field.title} isOpen={isOpen} title={field.title} icon={field.icon} path={field.path}/>
                 )
             )}
             </ul>
