@@ -17,7 +17,7 @@ class InvoiceNew extends Component{
 
     render() {
         return (
-            <div>
+            <div className="form-content">
                 {this.renderContent()}
             </div>
         );

@@ -90,7 +90,6 @@
 
 
 
-
 @media screen and (min-width:600px) {
     .list-items {
         width: calc(100% - 50px);
@@ -174,10 +173,6 @@
         flex:1
     }
 
-    .button-container {
-        display: flex;
-        justify-content: flex-end;
-    }
 
     .table-container  thead>tr {
         background-color: #092756;

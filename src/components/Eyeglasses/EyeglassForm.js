@@ -8,7 +8,7 @@ import EyeglassField from "../utils/InputField";
 import formFields from './formFields';
 import {getListOfItems} from "../../creators/listCreator";
 import {getSingleItem} from "../../creators/formCreator";
-import './eyeglass.css';
+import '../utils/formStyle.css';
 
 class EyeglassForm extends Component {
 

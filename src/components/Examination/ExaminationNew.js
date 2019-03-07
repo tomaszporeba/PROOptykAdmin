@@ -24,7 +24,7 @@ class ExaminationNew extends Component{
 
     render() {
         return (
-            <div>
+            <div className="form-content">
                 {
                     this.renderContent()
                 }

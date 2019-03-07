@@ -9,6 +9,7 @@ import DropDownSelect from "../utils/DropDownSelect/DropDownSelect";
 import ModalHelper from "../utils/Modal/ModalHelper";
 import {getListOfItems} from "../../creators/listCreator";
 import {getSingleItem} from "../../creators/formCreator";
+import '../utils/formStyle.css';
 
 
 class ExaminationForm extends Component {
@@ -61,10 +62,10 @@ class ExaminationForm extends Component {
 
     render() {
         return (
-            <div>
+            <div className="form-container">
                 <form onSubmit={this.props.handleSubmit(this.props.onExaminationSubmit)}>
                     {this.renderFields()}
-                    <button onClick={this.props.history.goBack} className="red btn-flat white-text">
+                    <button onClick={this.props.history.goBack} className="grey btn-flat white-text">
                         Cancel
                     </button>
                     <button type="submit" className="black btn-flat right white-text">
