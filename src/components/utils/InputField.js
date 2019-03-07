@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './inputField.css'
 
 
@@ -8,6 +8,9 @@ export default ({input, type, label, meta : { error, touched }}) => {
             <div className="form-group">
                 <input {...input} type={type} required="required"/>
                 <label htmlFor="input" className="control-label">{label}</label><i className="bar"></i>
+            </div>
+            <div className="red-text">
+                { touched && error }
             </div>
         </div>
 

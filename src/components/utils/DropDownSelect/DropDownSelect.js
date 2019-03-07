@@ -39,7 +39,7 @@ export class DropDownSelect extends Component {
         const {input, options, label, meta : { error, touched }} = this.props;
         if (options) {
             return (
-                <div>
+                <div style={{marginBottom: "2.25rem"}}>
                     <label>{label}</label>
                     <select {...input} className="browser-default" value={this.state.value} onChange={this.onChange} onClick={this.createClient}>
                         <option value="" disabled selected hidden>None</option>

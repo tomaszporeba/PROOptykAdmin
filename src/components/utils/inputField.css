@@ -1,9 +1,7 @@
 
 .input-container {
-    /*background-color: rgb(38, 38, 38);*/
     position: relative;
     margin: 0 auto;
-    /*background: #fff;*/
     width: 100%;
     border-radius: 1px;
 }
@@ -38,7 +36,6 @@
 .form-group {
     position: relative;
     margin-top: 2.25rem;
-    margin-bottom: 2.25rem;
 }
 
 .form-inline > .form-group,
