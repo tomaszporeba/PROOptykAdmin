@@ -19,7 +19,8 @@ class InvoiceForm extends Component {
         super(props);
         this.state = {
             showModal: false,
-            clients: []
+            clients: [],
+            item: {}
         };
 
         this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -39,9 +40,9 @@ class InvoiceForm extends Component {
         this.props.getListItems('/client','');
         let path = window.location.pathname.split('/');
         this.props.getItem(`${path[1]}/${path[3]}`);
-        this.props.initialize(this.props.singleItem);
+        this.setState({item: this.props.singleItem});
+        this.props.initialize(this.state.item);
     }
-
 
     renderFields() {
         return _.map(formFields, ({label, name, type}) => {

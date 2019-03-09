@@ -19,7 +19,7 @@ class ClientReview extends Component {
     };
     reviewFields = _.map(formFields, ({ name, label }) => {
         return (
-            <div key={ name }>
+            <div className="review-field-container" key={ name }>
                 <label>{ label }</label>
                 <div>
                     { this.props.formValues[name]}
@@ -31,9 +31,9 @@ class ClientReview extends Component {
     render() {
         return (
             <div className="form-container">
-                <p>Please confirm your  entries</p>
+                <h4>Please confirm your  entries</h4>
                 { this.reviewFields }
-                <button className="red btn-flat white-text" onClick={ this.props.onCancel }>Cancel </button>
+                <button className="grey btn-flat white-text" onClick={ this.props.onCancel }>Cancel </button>
                 <button onClick={() => this.handleSubmit()} className="black btn-flat right white-text">Save</button>
             </div>
         );

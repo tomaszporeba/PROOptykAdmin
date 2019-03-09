@@ -12,6 +12,19 @@ export function getListOfItems(path, param) {
     }
 }
 
+export function getSortedItems(listItems, keyValue) {
+    return function (dispatch) {
+        let isDescending;
+        dispatch(getListOfItemsStart("LIST_REQUEST_BEGIN"));
+        isDescending = listItems[0][keyValue] >= listItems.slice(-1).pop()[keyValue];
+        isDescending ? listItems = listItems.sort((a, b) => (a[keyValue] > b[keyValue]) ? 1 : ((b[keyValue] > a[keyValue]) ? -1 : 0)) :
+            listItems = listItems.sort((a, b) => (a[keyValue] < b[keyValue]) ? 1 : ((b[keyValue] < a[keyValue]) ? -1 : 0));
+       return dispatch(getListOfItemsSuccess("LIST_REQUEST_SUCCESS", listItems))
+    }
+
+
+}
+
 function getListOfItemsStart(type) {
     return {
         type

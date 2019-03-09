@@ -10,6 +10,7 @@ export default function (state = initialState, action) {
                 isLoading: true
             };
         case "LIST_REQUEST_SUCCESS":
+            console.log(action.items);
             return { listItems: action.items, isLoading: false };
         default:
             return state;

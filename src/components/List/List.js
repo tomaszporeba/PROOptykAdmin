@@ -4,7 +4,7 @@ import './list.css'
 import {connect} from "react-redux";
 import _ from 'lodash';
 import {getEyeglasses} from "../../actions";
-import {getListOfItems} from "../../creators/listCreator";
+import {getListOfItems, getSortedItems} from "../../creators/listCreator";
 
 const clickableItems = ['number', 'name', 'title', 'holder_name', 'lastName'];
 
@@ -85,7 +85,6 @@ class List extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            listItems: [],
             param: ''
         }
     }
@@ -97,13 +96,7 @@ class List extends React.Component {
     }
 
     sortArray(keyValue) {
-        let isDescending;
-        isDescending = this.state.listItems[0][keyValue] >= this.state.listItems.slice(-1).pop()[keyValue];
-        isDescending ? this.setState({
-            listItems: this.state.listItems.sort((a, b) => (a[keyValue] > b[keyValue]) ? 1 : ((b[keyValue] > a[keyValue]) ? -1 : 0))
-        }) : this.setState({
-            listItems: this.state.listItems.sort((a, b) => (a[keyValue] < b[keyValue]) ? 1 : ((b[keyValue] < a[keyValue]) ? -1 : 0))
-        })
+        this.props.getSortedItems(this.props.listItems, keyValue);
     }
 
     debounceEvent(...args) {
@@ -157,7 +150,7 @@ class List extends React.Component {
                         </tbody>
                     </table>
                     <div className="fixed-action-btn">
-                        <Link to="eyeglass/new" className="btn-floating btn-medium black">
+                        <Link to={`${window.location.pathname}/new`} className="btn-floating btn-medium black">
                             <i className="medium material-icons">add</i>
                         </Link>
                     </div>
@@ -168,6 +161,7 @@ class List extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log(state);
     return {
         listItems: state.list.listItems,
         isLoading: state.list.isLoading
@@ -179,6 +173,9 @@ function mapDispatchToProps(dispatch) {
     return {
         getListItems: (path, sortType) => {
             dispatch(getListOfItems(path, sortType))
+        },
+        getSortedItems: (listItems, keyValue) => {
+            dispatch(getSortedItems(listItems,keyValue))
         }
     }
 }
