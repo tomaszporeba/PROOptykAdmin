@@ -30,7 +30,7 @@ class ClientReview extends Component {
 
     render() {
         return (
-            <div>
+            <div className="form-container">
                 <p>Please confirm your  entries</p>
                 { this.reviewFields }
                 <button className="red btn-flat white-text" onClick={ this.props.onCancel }>Cancel </button>

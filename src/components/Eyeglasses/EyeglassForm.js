@@ -34,6 +34,7 @@ class EyeglassForm extends Component {
         return (
             <div className="form-container">
                 <form onSubmit={this.props.handleSubmit(this.props.onEyeglassSubmit)}>
+                    <h4>Please fill fields</h4>
                     {this.renderFields()}
                     <button onClick={this.props.history.goBack} className="grey btn-flat white-text">
                         Cancel

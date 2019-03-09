@@ -27,11 +27,12 @@ class ExaminationForm extends Component {
     }
 
     handleCloseModal() {
-        this.props.getListItems('/client','');
+        this.props.getListItems('/client', '');
         this.setState({showModal: false});
     }
+
     componentDidMount() {
-        this.props.getListItems('/client','');
+        this.props.getListItems('/client', '');
         let path = window.location.pathname.split('/');
         this.props.getItem(`${path[1]}/${path[3]}`);
         this.props.initialize(this.props.singleItem);
@@ -46,7 +47,10 @@ class ExaminationForm extends Component {
                     defaultValue={this.props.initialValues.clientId}
                     component={DropDownSelect}
                     handleOpenModal={() => this.handleOpenModal()}
-                    options={this.props.listItems.map(client => {client.label = `${client.name} ${client.lastName}`; return client})}
+                    options={this.props.listItems.map(client => {
+                        client.label = `${client.name} ${client.lastName}`;
+                        return client
+                    })}
                 />)
             } else {
                 return <Field
@@ -64,6 +68,7 @@ class ExaminationForm extends Component {
         return (
             <div className="form-container">
                 <form onSubmit={this.props.handleSubmit(this.props.onExaminationSubmit)}>
+                    <h4>Please fill fields</h4>
                     {this.renderFields()}
                     <button onClick={this.props.history.goBack} className="grey btn-flat white-text">
                         Cancel
@@ -73,7 +78,8 @@ class ExaminationForm extends Component {
                         <i className="material-icons right">done</i>
                     </button>
                 </form>
-                {<ModalHelper handleCloseModal={this.handleCloseModal} isOpen={this.state.showModal} formType={"client"} />}
+                {<ModalHelper handleCloseModal={this.handleCloseModal} isOpen={this.state.showModal}
+                              formType={"client"}/>}
             </div>
         );
     }
@@ -90,17 +96,23 @@ function validate(values) {
     return errors;
 }
 
-const mapStateToProps= (state) => {
-    return {listItems: state.list.listItems,
+const mapStateToProps = (state) => {
+    return {
+        listItems: state.list.listItems,
         initialValues: state.formInput.singleItem,
-        isLoading: state.list.isLoading}
-} ;
+        isLoading: state.list.isLoading
+    }
+};
 
 
 function mapDispatchToProps(dispatch) {
     return {
-        getListItems: (path, sortType) => {dispatch(getListOfItems(path, sortType))},
-        getItem: (path) => {dispatch(getSingleItem(path))}
+        getListItems: (path, sortType) => {
+            dispatch(getListOfItems(path, sortType))
+        },
+        getItem: (path) => {
+            dispatch(getSingleItem(path))
+        }
     }
 }
 

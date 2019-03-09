@@ -1,10 +1,18 @@
 .form-content {
     display: flex;
-    height: calc(100% - 56px);
+    /*height: calc(100% - 56px);*/
     background-color: rgb(38, 38, 38);
 }
 
 .form-container {
     width: 90%;
     margin: 0 auto;
+}
+
+.form-container h4 {
+    color: white;
+}
+
+.review-field-container{
+    color: white;
 }

@@ -1,5 +1,7 @@
 .App {
     font-family: 'Montserrat', sans-serif;
+    background-color: rgb(38, 38, 38);
+    height: auto;
 }
 * {
     box-sizing: border-box;

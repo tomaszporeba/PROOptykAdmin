@@ -34,8 +34,8 @@ class InvoiceReview extends Component {
 
     render() {
         return (
-            <div>
-                <p>Please confirm your  entries</p>
+            <div className="form-container">
+                <h4>Please confirm your  entries</h4>
                 { this.reviewFields }
                 <button className="red btn-flat white-text" onClick={ this.props.onCancel }>Cancel </button>
                 <button onClick={() => this.handleSubmit()} className="black btn-flat right white-text">Save</button>
