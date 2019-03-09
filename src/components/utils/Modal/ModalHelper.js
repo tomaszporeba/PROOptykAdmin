@@ -4,6 +4,7 @@ import InvoiceNew from "../../Invoices/InvoiceNew";
 import EyeglassNew from "../../Eyeglasses/EyeglassNew";
 import ExaminationNew from "../../Examination/ExaminationNew";
 import ClientNew from "../../Clients/ClientNew";
+import './modal.css'
 
 
 class ModalHelper extends Component {
@@ -39,7 +40,7 @@ class ModalHelper extends Component {
                 isOpen={this.state.showModal}
                 contentLabel="onRequestClose Example"
                 onRequestClose={this.props.handleCloseModal}
-                className="Modal"
+                className="Modal modal-container"
                 overlayClassName="Overlay"
             >
                 {formType}

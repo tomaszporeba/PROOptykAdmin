@@ -1,0 +1,9 @@
+.Modal {
+    top: 10% !important;
+    left: 10% !important;
+    right: 10% !important;
+    bottom: 10% !important;
+    border: none!important;
+    background-color: rgb(38, 38, 38);
+    overflow: scroll;
+}

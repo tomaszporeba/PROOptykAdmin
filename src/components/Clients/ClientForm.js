@@ -74,7 +74,7 @@ class ClientForm extends Component {
                         <i className="material-icons right">done</i>
                     </button>
                 </form>
-                {<ModalHelper handleCloseModal={this.handleCloseModal} isOpen={this.state.showModal} formType={"eyeglass"}/>}
+                <ModalHelper handleCloseModal={this.handleCloseModal} isOpen={this.state.showModal} formType={"eyeglass"}/>
             </div>
         );
     }
