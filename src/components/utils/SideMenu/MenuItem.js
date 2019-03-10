@@ -6,7 +6,7 @@ import './sideMenu.css';
 const MenuItem = ({title, icon, isOpen, path, toggleSidebar}) => {
     return (
             <li onClick={() => toggleSidebar()}>
-                <NavLink exact to={path} activeClassName="selected">
+                <NavLink to={path} activeClassName="selected">
                 <i className="medium material-icons">{icon}</i>
                 <span>{title}</span>
                 </NavLink>

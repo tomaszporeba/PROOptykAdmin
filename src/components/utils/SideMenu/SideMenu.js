@@ -1,10 +1,10 @@
 import React from 'react';
 import './sideMenu.css'
 import MenuItem from './MenuItem';
+import {NavLink} from "react-router-dom";
 
 
 const MENU_FIELDS = [
-    {title: "Dashboard", icon: "home", path: "/"},
     {title: "Eyeglasses", icon: "remove_red_eye", path: "/eyeglass"},
     {title: "Invoices", icon: "list_alt", path: "/invoice" },
     {title: "Clients", icon: "people", path: "/client"},
@@ -17,6 +17,12 @@ const SideMenu = ({isOpen, toggleSidebar}) => {
     return (
         <nav className={sidebarClass}>
             <ul>
+                <li onClick={() => toggleSidebar()}>
+                    <NavLink exact to={"/"} activeClassName="selected">
+                        <i className="medium material-icons">{"home"}</i>
+                        <span>{"Dashboard"}</span>
+                    </NavLink>
+                </li>
             {MENU_FIELDS.map(field => (
                 <MenuItem toggleSidebar={toggleSidebar} key={field.title} isOpen={isOpen} title={field.title} icon={field.icon} path={field.path}/>
                 )
