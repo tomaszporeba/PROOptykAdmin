@@ -81,6 +81,10 @@
     transition-delay: .4s;
 }
 
+.selected {
+    border-left: white 2px solid;
+    width: 100%;
+}
 
 
 @media screen and (min-width:600px) {

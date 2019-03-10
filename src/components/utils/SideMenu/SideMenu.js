@@ -5,10 +5,10 @@ import MenuItem from './MenuItem';
 
 const MENU_FIELDS = [
     {title: "Dashboard", icon: "home", path: "/"},
-    {title: "Eyeglasses", icon: "remove_red_eye", path: "eyeglass"},
-    {title: "Invoices", icon: "list_alt", path: "invoice" },
-    {title: "Clients", icon: "people", path: "client"},
-    {title: "Examinations", icon: "insert_invitation", path: "examination"}
+    {title: "Eyeglasses", icon: "remove_red_eye", path: "/eyeglass"},
+    {title: "Invoices", icon: "list_alt", path: "/invoice" },
+    {title: "Clients", icon: "people", path: "/client"},
+    {title: "Examinations", icon: "insert_invitation", path: "/examination"}
 ];
 
 const SideMenu = ({isOpen, toggleSidebar}) => {
