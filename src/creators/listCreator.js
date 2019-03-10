@@ -21,8 +21,6 @@ export function getSortedItems(listItems, keyValue) {
             listItems = listItems.sort((a, b) => (a[keyValue] < b[keyValue]) ? 1 : ((b[keyValue] < a[keyValue]) ? -1 : 0));
        return dispatch(getListOfItemsSuccess("LIST_REQUEST_SUCCESS", listItems))
     }
-
-
 }
 
 function getListOfItemsStart(type) {

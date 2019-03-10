@@ -8,7 +8,7 @@ import formFields from './formFields';
 import DropDownSelect from "../utils/DropDownSelect/DropDownSelect";
 import ModalHelper from "../utils/Modal/ModalHelper";
 import {getListOfItems} from "../../creators/listCreator";
-import {getSingleItem} from "../../creators/formCreator";
+import {getSingleItem, setFormType} from "../../creators/formCreator";
 import '../utils/formStyle.css';
 
 
@@ -16,19 +16,8 @@ class ExaminationForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showModal: false,
             clients: []
         };
-        this.handleCloseModal = this.handleCloseModal.bind(this);
-    }
-
-    handleOpenModal() {
-        this.setState({showModal: true});
-    }
-
-    handleCloseModal() {
-        this.props.getListItems('/client', '');
-        this.setState({showModal: false});
     }
 
     componentDidMount() {
@@ -44,9 +33,9 @@ class ExaminationForm extends Component {
                 return (<Field
                     name="clientId"
                     label="Client"
+                    formType="client"
                     defaultValue={this.props.initialValues.clientId}
                     component={DropDownSelect}
-                    handleOpenModal={() => this.handleOpenModal()}
                     options={this.props.listItems.map(client => {
                         client.label = `${client.name} ${client.lastName}`;
                         return client
@@ -78,8 +67,7 @@ class ExaminationForm extends Component {
                         <i className="material-icons right">done</i>
                     </button>
                 </form>
-                {<ModalHelper handleCloseModal={this.handleCloseModal} isOpen={this.state.showModal}
-                              formType={"client"}/>}
+                <ModalHelper/>
             </div>
         );
     }
@@ -112,6 +100,9 @@ function mapDispatchToProps(dispatch) {
         },
         getItem: (path) => {
             dispatch(getSingleItem(path))
+        },
+        setFormType: (formType) => {
+            dispatch(setFormType(formType))
         }
     }
 }

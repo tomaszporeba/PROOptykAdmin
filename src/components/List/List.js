@@ -161,7 +161,6 @@ class List extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         listItems: state.list.listItems,
         isLoading: state.list.isLoading

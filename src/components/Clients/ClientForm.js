@@ -10,28 +10,19 @@ import DropDownSelect from "../utils/DropDownSelect/DropDownSelect";
 import ModalHelper from "../utils/Modal/ModalHelper";
 import {getListOfItems} from "../../creators/listCreator";
 import {getSingleItem} from "../../creators/formCreator";
+import {setFormType} from "../../creators/formCreator";
 
 class ClientForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showModal: false,
             eyeglasses: []
         };
-        this.handleCloseModal = this.handleCloseModal.bind(this);
 
     }
 
-    handleOpenModal() {
-        this.setState({showModal: true});
-    }
-
-    handleCloseModal() {
-        this.props.getListItems('/eyeglass', '');
-        this.setState({showModal: false});
-    }
     componentDidMount() {
-        this.props.getListItems('/eyeglass','');
+        this.props.getListItems('/eyeglass', '');
         let path = window.location.pathname.split('/');
         this.props.getItem(`${path[1]}/${path[3]}`);
         this.props.initialize(this.props.singleItem);
@@ -44,9 +35,12 @@ class ClientForm extends Component {
                     name="eyeglassId"
                     label="Eyeglass"
                     defaultValue={this.props.initialValues.eyeglassId}
+                    formType="eyeglass"
                     component={DropDownSelect}
-                    handleOpenModal={() => this.handleOpenModal()}
-                    options={this.props.listItems.map(eyeglass => {eyeglass.label = `${eyeglass.holder_name}`; return eyeglass})}
+                    options={this.props.listItems.map(eyeglass => {
+                        eyeglass.label = `${eyeglass.holder_name}`;
+                        return eyeglass
+                    })}
                 />)
             } else {
                 return <Field
@@ -74,7 +68,7 @@ class ClientForm extends Component {
                         <i className="material-icons right">done</i>
                     </button>
                 </form>
-                <ModalHelper handleCloseModal={this.handleCloseModal} isOpen={this.state.showModal} formType={"eyeglass"}/>
+                <ModalHelper/>
             </div>
         );
     }
@@ -91,17 +85,27 @@ function validate(values) {
     return errors;
 }
 
-const mapStateToProps= (state) => {
-    return {listItems: state.list.listItems,
+const mapStateToProps = (state) => {
+    return {
+        listItems: state.list.listItems,
         initialValues: state.formInput.singleItem,
-        isLoading: state.list.isLoading}
-} ;
+        isLoading: state.list.isLoading,
+        isModalOpen: state.modal.isModalOpen
+    }
+};
 
 
 function mapDispatchToProps(dispatch) {
     return {
-        getListItems: (path, sortType) => {dispatch(getListOfItems(path, sortType))},
-        getItem: (path) => {dispatch(getSingleItem(path))}
+        getListItems: (path, sortType) => {
+            dispatch(getListOfItems(path, sortType))
+        },
+        getItem: (path) => {
+            dispatch(getSingleItem(path))
+        },
+        setFormType: (formType) => {
+            dispatch(setFormType(formType))
+        }
     }
 }
 

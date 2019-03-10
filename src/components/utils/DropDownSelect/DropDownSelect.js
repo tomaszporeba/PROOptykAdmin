@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
+import {connect} from "react-redux";
+import { showModal } from "../../../creators/modalCreator";
+import {getSingleItem} from "../../../creators/formCreator";
 
 export class DropDownSelect extends Component {
     constructor(props) {
         super(props);
         this.state = {
             defaultValue: "None",
+            formType: "eyeglass",
             value: this.props.defaultValue || ''
         };
 
@@ -20,6 +24,7 @@ export class DropDownSelect extends Component {
         );
     };
 
+
     componentWillReceiveProps(newProps) {
         if (this.props !== newProps) {
             this.setState({value: newProps.defaultValue});
@@ -28,7 +33,7 @@ export class DropDownSelect extends Component {
     createClient = (event) => {
         if (event.detail === 0) {
             if (event.target.value == 0) {
-                this.props.handleOpenModal()
+                this.props.openModal(this.props.formType);
             }
         }
     };
@@ -61,5 +66,12 @@ export class DropDownSelect extends Component {
 
 }
 
+function mapDispatchToProps(dispatch) {
+    return {
+        openModal: (formType) => {
+            dispatch(showModal(formType))
+        }
+    }
+}
 
-export default DropDownSelect;
+export default connect(null, mapDispatchToProps)(DropDownSelect);

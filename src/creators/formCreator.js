@@ -11,6 +11,12 @@ export function getSingleItem(path) {
     }
 }
 
+export function setFormType(formType) {
+    return async function(dispatch) {
+        return dispatch({type: "SET_FORM_TYPE", formType})
+    }
+}
+
 function getListOfItemsStart(type) {
     return {
         type

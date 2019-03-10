@@ -6,7 +6,6 @@ import { reduxForm } from 'redux-form';
 class ClientNew extends Component{
     state = {
         showFormReview: false,
-        isModal: this.props.isModal || false
     };
 
     handleModal = () =>  {
@@ -16,7 +15,7 @@ class ClientNew extends Component{
 
     renderContent() {
         if (this.state.showFormReview) {
-            return <ClientReview handleModalSubmit={() =>  this.handleModal()} isModal={this.state.isModal} onCancel={() => this.setState({ showFormReview: false })}/>;
+            return <ClientReview handleModalSubmit={() =>  this.handleModal()}  onCancel={() => this.setState({ showFormReview: false })}/>;
         }
 
         return <ClientForm onClientSubmit={() => this.setState({ showFormReview: true })}/>;

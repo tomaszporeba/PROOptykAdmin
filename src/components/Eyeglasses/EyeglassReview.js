@@ -44,7 +44,8 @@ class EyeglassReview extends Component {
 
 function mapStateToProps(state) {
     return {
-        formValues: state.form.eyeglassForm.values
+        formValues: state.form.eyeglassForm.values,
+        isModal: state.modal.isModalOpen
     };
     
 }

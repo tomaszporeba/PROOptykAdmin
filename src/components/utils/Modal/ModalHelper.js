@@ -5,41 +5,32 @@ import EyeglassNew from "../../Eyeglasses/EyeglassNew";
 import ExaminationNew from "../../Examination/ExaminationNew";
 import ClientNew from "../../Clients/ClientNew";
 import './modal.css'
-
+import {connect} from "react-redux";
+import {closeModal} from "../../../creators/modalCreator";
 
 class ModalHelper extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { showModal: this.props.isOpen};
-
-    }
-
-    componentWillReceiveProps(newProps) {
-        if (this.props !== newProps){
-            this.setState({showModal: newProps.isOpen})
-        }
-    }
 
     render() {
         let formType;
+        console.log(this.props.formType);
         switch (this.props.formType) {
             case 'eyeglass':
-                formType = <EyeglassNew handleModalSubmit={this.props.handleCloseModal} isModal={true}/>;
+                formType = <EyeglassNew isModal={true}/>;
                 break;
             case 'client':
-                formType = <ClientNew handleModalSubmit={this.props.handleCloseModal} isModal={true}/>;
+                formType = <ClientNew isModal={true}/>;
                 break;
             case 'invoice':
-                formType = <InvoiceNew handleModalSubmit={this.props.handleCloseModal} isModal={true}/>;
+                formType = <InvoiceNew isModal={true}/>;
                 break;
             case 'examination':
-                formType = <ExaminationNew handleModalSubmit={this.props.handleCloseModal} isModal={true}/>
+                formType = <ExaminationNew isModal={true}/>
         }
-        return(
+        return (
             <Modal
-                isOpen={this.state.showModal}
-                contentLabel="onRequestClose Example"
-                onRequestClose={this.props.handleCloseModal}
+                isOpen={this.props.isOpen}
+                contentLabel="onRequestClose"
+                onRequestClose={this.props.closeModal}
                 className="Modal modal-container"
                 overlayClassName="Overlay"
             >
@@ -50,5 +41,20 @@ class ModalHelper extends Component {
 
 }
 
-export default ModalHelper;
+const mapStateToProps = (state) => {
+    return {
+        isOpen: state.modal.isModalOpen,
+        formType: state.modal.formType
+    }
+};
+
+function mapDispatchToProps(dispatch) {
+    return {
+        closeModal: () => {
+            dispatch(closeModal())
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModalHelper);
 

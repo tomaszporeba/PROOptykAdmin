@@ -43,7 +43,8 @@ class ClientReview extends Component {
 
 function mapStateToProps(state) {
     return {
-        formValues: state.form.clientForm.values
+        formValues: state.form.clientForm.values,
+        isModal: state.modal.isModalOpen
     };
 
 }

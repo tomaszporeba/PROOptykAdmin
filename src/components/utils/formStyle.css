@@ -1,12 +1,15 @@
 .form-content {
     display: flex;
-    /*height: calc(100% - 56px);*/
     background-color: rgb(38, 38, 38);
 }
 
 .form-container {
     width: 90%;
     margin: 0 auto;
+}
+
+.form-container button {
+    margin-bottom: 20px;
 }
 
 .form-container h4 {
