@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import _ from 'lodash';
 import {getEyeglasses} from "../../actions";
 import {getListOfItems, getSortedItems} from "../../creators/listCreator";
+import moment from 'moment';
 
 const clickableItems = ['number', 'name', 'title', 'holder_name', 'lastName'];
 
@@ -52,12 +53,16 @@ class Row extends React.Component {
 const Fields = ({listItem}) => {
     let fields = [];
     let omitted = ['createdAt', 'updatedAt', 'id'];
+    let dates = ['orderDate', 'scheduledDate'];
     for (let key in listItem) {
         if (listItem.hasOwnProperty(key)) {
             if (!omitted.includes(key)) {
                 if (typeof listItem[key] === 'object') {
                     fields.push(LinkItem(key, listItem[key]))
-                } else {
+                } else if (dates.includes(key)) {
+                    fields.push(<td key={listItem[key]}>{moment(listItem[key]).format("DD-MM-YYYY")}</td>)
+                }
+                else {
                     fields.push(<td key={listItem[key]}>{listItem[key]}</td>)
                 }
             }
