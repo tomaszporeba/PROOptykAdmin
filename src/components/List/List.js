@@ -37,10 +37,10 @@ class Row extends React.Component {
                     <Fields listItem={listItem}/>
                 </div>
                 <div>
-                    <Link style={{color:"white"}} to={editPath}>
+                    <Link style={{color: "white"}} to={editPath}>
                         <i className="small material-icons">edit</i>
                     </Link>
-                    <Link style={{color:"white"}} to={deletePath}>
+                    <Link style={{color: "white"}} to={deletePath}>
                         <i className="small material-icons">delete</i>
                     </Link>
                 </div>
@@ -135,32 +135,32 @@ class List extends React.Component {
 
     render() {
         return (
-            <div className="list-items-container">
-                <span>{window.location.pathname.replace('/', '').toUpperCase()}</span>
-                <div className="list-items">
-                    <div className="search-container">
-                        <input placeholder="Search..." type="text" name="param"
-                               onChange={this.debounceEvent(this.handleChange, 700)}/>
-                    </div>
-                    <table className="table-container">
-                        <thead>
-                        <tr>
-                            {this.renderHeader()}
-                        </tr>
-                        </thead>
-                        <tbody>
+                <div className="list-items-container">
+                    <span>{window.location.pathname.replace('/', '').toUpperCase()}</span>
+                    <div className="list-items">
+                        <div className="search-container">
+                            <input placeholder="Search..." type="text" name="param"
+                                   onChange={this.debounceEvent(this.handleChange, 700)}/>
+                        </div>
+                        <table className="table-container">
+                            <thead>
+                            <tr>
+                                {this.renderHeader()}
+                            </tr>
+                            </thead>
+                            <tbody>
 
-                        {this.renderRows()}
+                            {this.renderRows()}
 
-                        </tbody>
-                    </table>
-                    <div className="fixed-action-btn">
-                        <Link to={`${window.location.pathname}/new`} className="btn-floating btn-medium black">
-                            <i className="medium material-icons">add</i>
-                        </Link>
+                            </tbody>
+                        </table>
+                        <div className="fixed-action-btn">
+                            <Link to={`${window.location.pathname}/new`} className="btn-floating btn-medium black">
+                                <i className="medium material-icons">add</i>
+                            </Link>
+                        </div>
                     </div>
                 </div>
-            </div>
         );
     }
 }
@@ -179,7 +179,7 @@ function mapDispatchToProps(dispatch) {
             dispatch(getListOfItems(path, sortType))
         },
         getSortedItems: (listItems, keyValue) => {
-            dispatch(getSortedItems(listItems,keyValue))
+            dispatch(getSortedItems(listItems, keyValue))
         }
     }
 }

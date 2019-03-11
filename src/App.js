@@ -33,24 +33,27 @@ class App extends Component {
                     <Route exact path="/" component={Dashboard}/>
                     <Route exact path="/login" component={Login}/>
                     <Header toggleSidebar={this.handleViewSidebar}/>
-                    <SideMenu toggleSidebar={this.handleViewSidebar} isOpen={this.state.sidebarOpen}/>
-                    <PrivateRoute exact path="/dashboard" component={Dashboard}/>
-                    <PrivateRoute exact path="/eyeglass" columns={headers.eyeglassColumns}
-                                  component={List}/>
-                    <PrivateRoute exact path="/invoice" columns={headers.invoiceColumns}
-                                  component={List}/>
-                    <PrivateRoute exact path="/examination" columns={headers.examinationColumns}
-                                  component={List}/>
-                    <PrivateRoute exact path="/client" columns={headers.clientColumns}
-                                  component={List}/>
-                    <PrivateRoute exact path="/eyeglass/edit/:id" component={EyeglassNew}/>
-                    <PrivateRoute exact path="/eyeglass/new" component={EyeglassNew}/>
-                    <PrivateRoute exact path="/invoice/edit/:id" component={InvoiceNew}/>
-                    <PrivateRoute exact path="/invoice/new" component={InvoiceNew}/>
-                    <PrivateRoute exact path="/client/edit/:id" component={ClientNew}/>
-                    <PrivateRoute exact path="/client/new" component={ClientNew}/>
-                    <PrivateRoute exact path="/examination/edit/:id" component={ExaminationNew}/>
-                    <PrivateRoute exact path="/examination/new" component={ExaminationNew}/>
+                    <div style={{display:"flex", flexDirection:"row", flexGrow: 1}}>
+                        <SideMenu toggleSidebar={this.handleViewSidebar} isOpen={this.state.sidebarOpen}/>
+                        <PrivateRoute exact path="/dashboard" component={Dashboard}/>
+                        <PrivateRoute exact path="/eyeglass" columns={headers.eyeglassColumns}
+                                      component={List}/>
+                        <PrivateRoute exact path="/invoice" columns={headers.invoiceColumns}
+                                      component={List}/>
+                        <PrivateRoute exact path="/examination" columns={headers.examinationColumns}
+                                      component={List}/>
+                        <PrivateRoute exact path="/client" columns={headers.clientColumns}
+                                      component={List}/>
+                        <PrivateRoute exact path="/eyeglass/edit/:id" component={EyeglassNew}/>
+                        <PrivateRoute exact path="/eyeglass/new" component={EyeglassNew}/>
+                        <PrivateRoute exact path="/invoice/edit/:id" component={InvoiceNew}/>
+                        <PrivateRoute exact path="/invoice/new" component={InvoiceNew}/>
+                        <PrivateRoute exact path="/client/edit/:id" component={ClientNew}/>
+                        <PrivateRoute exact path="/client/new" component={ClientNew}/>
+                        <PrivateRoute exact path="/examination/edit/:id" component={ExaminationNew}/>
+                        <PrivateRoute exact path="/examination/new" component={ExaminationNew}/>
+                    </div>
+
                 </div>
             </BrowserRouter>
         );

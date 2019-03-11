@@ -11,7 +11,7 @@
 }
 
 .side-menu-container ul {
-    margin-top: 20%;
+    margin-top: 100px;
     list-style-type: none;
 }
 
@@ -32,6 +32,8 @@
 }
 
 .side-menu-container span {
+    display: flex;
+    align-items: center;
     font-size: 2rem;
 }
 
@@ -89,22 +91,139 @@
 
 @media screen and (min-width:600px) {
     .side-menu-container {
-        background-color: #2c3034;
-        -webkit-transition:width .07s linear;
-        transition:width .07s linear;
-        -webkit-transform:translateZ(0) scale(1,1);
-        height: 100%;
+        display: flex;
+        position: unset;
+        height: inherit
     }
-
     .sidebar-open {
         width: 300px !important;
+        transition: .4s ease-in-out;
     }
 
     .sidebar-closed {
+        transform: translateX(0);
+        transition: .4s ease-in-out;
+        transition-delay: .5s;
         width: 50px !important;
     }
-    .top-image {
-        background-color: red;
-        height: 30%;
+    .sidebar-closed li {
+        transform: translateX(0);
+        transition: .4s linear;
     }
+    .sidebar-open span, .sidebar-closed span{
+        max-height: 56px;
+    }
+    .sidebar-open span {
+        visibility: hidden;
+    }
+
+    .sidebar-closed span {
+        animation: .3s fadeIn;
+        animation-fill-mode: forwards;
+        visibility: visible;
+        animation-delay: .4s;
+    }
+
+    .sidebar-closed li:first-child>a>span {
+        animation: .2s fadeIn;
+        animation-fill-mode: forwards;
+        transition-delay: .4s;
+        animation-delay: .4s;
+
+    }
+
+    .sidebar-closed li:nth-child(2)>a>span {
+        animation: .2s fadeIn;
+        animation-fill-mode: forwards;
+        transform: translateY(-56px);
+        transition: .1s linear;
+        transition-delay: .3s;
+        animation-delay: .3s;
+    }
+
+    .sidebar-closed li:nth-child(3)>a>span {
+        animation: .2s fadeIn;
+        animation-fill-mode: forwards;
+        transform: translateY(-112px);
+        transition: .2s linear;
+        transition-delay: .2s;
+        animation-delay: .2s;
+    }
+
+    .sidebar-closed li:nth-child(4)>a>span {
+        animation: .2s fadeIn;
+        animation-fill-mode: forwards;
+        transform: translateY(-168px);
+        transition: .3s linear;
+        transition-delay: .1s;
+        animation-delay: .1s;
+    }
+    .sidebar-closed li:nth-child(5)>a>span {
+        animation: .2s fadeIn;
+        animation-fill-mode: forwards;
+        transform: translateY(-224px);
+        transition: .4s linear;
+    }
+
+    .sidebar-open li:first-child>a>span {
+        animation: .2s fadeOut;
+        animation-fill-mode: forwards;
+        animation-delay: .4s;
+        transition-delay: .4s;
+
+    }
+
+    .sidebar-open li:nth-child(2)>a>span {
+        animation: .2s fadeOut;
+        animation-fill-mode: forwards;
+        transition: .1s linear;
+        animation-delay: .4s;
+        transition-delay: .4s;
+    }
+
+    .sidebar-open li:nth-child(3)>a>span {
+        animation: .2s fadeOut;
+        animation-fill-mode: forwards;
+        transition: .2s linear;
+        animation-delay: .4s;
+        transition-delay: .4s;
+
+    }
+
+    .sidebar-open li:nth-child(4)>a>span {
+        animation: .2s fadeOut;
+        animation-fill-mode: forwards;
+        transition: .3s linear;
+        animation-delay: .4s;
+        transition-delay: .4s;
+
+    }
+    .sidebar-open li:nth-child(5)>a>span {
+        animation: .2s fadeOut;
+        animation-fill-mode: forwards;
+        transition: .4s linear;
+        animation-delay: .4s;
+        transition-delay: .4s;
+
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            visibility: hidden;
+            opacity: 0;
+        }
+    }
+    @keyframes fadeOut {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+
 }
