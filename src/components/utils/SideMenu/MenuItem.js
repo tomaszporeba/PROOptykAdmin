@@ -4,9 +4,10 @@ import './sideMenu.css';
 
 
 const MenuItem = ({title, icon, isOpen, path, toggleSidebar}) => {
+    let spanClass = isOpen ? 'span-opened' : 'span-closed';
     return (
-            <li onClick={() => toggleSidebar()}>
-                <NavLink to={path} style={{width:"100%"}} activeClassName="selected">
+            <li onClick={() => {if(window.innerWidth< 600) toggleSidebar()}}>
+                <NavLink  to={path} style={{width:"100%"}} activeClassName="selected">
                 <i className="medium material-icons">{icon}</i>
                     <span>{title}</span>
                 </NavLink>

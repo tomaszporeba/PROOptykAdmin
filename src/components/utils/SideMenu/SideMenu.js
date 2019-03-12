@@ -14,11 +14,12 @@ const MENU_FIELDS = [
 const SideMenu = ({isOpen, toggleSidebar}) => {
 
     let sidebarClass = isOpen ? 'sidebar-open side-menu-container' : 'sidebar-closed side-menu-container';
+    let ulClass = isOpen ? 'ul-open' : 'ul-close';
     return (
         <nav className={sidebarClass}>
-            <ul>
-                <li onClick={() => toggleSidebar()}>
-                    <NavLink exact to={"/"} activeClassName="selected">
+            <ul className={ulClass}>
+                <li onClick={() => {if(window.innerWidth< 600) toggleSidebar()}}>
+                    <NavLink className={ulClass} exact to={"/"} activeClassName="selected">
                         <i className="medium material-icons">{"home"}</i>
                         <span>{"Dashboard"}</span>
                     </NavLink>

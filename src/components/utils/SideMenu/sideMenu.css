@@ -204,7 +204,10 @@
         transition: .4s linear;
         animation-delay: .4s;
         transition-delay: .4s;
+    }
 
+    .ul-close {
+        width: 50px!important;
     }
 
     @keyframes fadeIn {
@@ -212,6 +215,7 @@
             opacity: 1;
         }
         100% {
+            z-index: -1;
             visibility: hidden;
             opacity: 0;
         }
@@ -221,6 +225,7 @@
             opacity: 0;
         }
         100% {
+            z-index: -1;
             visibility: visible;
             opacity: 1;
         }

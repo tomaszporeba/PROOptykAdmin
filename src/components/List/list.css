@@ -94,7 +94,12 @@
     .list-items-container {
         flex-grow: 1;
     }
-    /*.list-items {*/
+
+    .table-container th, .fields-container td {
+        flex-flow: column;
+        width: unset;
+    }
+        /*.list-items {*/
         /*width: calc(100% - 50px);*/
         /*height: calc(100% - 160px);*/
     /*}*/
