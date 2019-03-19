@@ -60,10 +60,10 @@ const Fields = ({listItem}) => {
                 if (typeof listItem[key] === 'object') {
                     fields.push(LinkItem(key, listItem[key]))
                 } else if (dates.includes(key)) {
-                    fields.push(<td key={listItem[key]}>{moment(listItem[key]).format("DD-MM-YYYY")}</td>)
+                    fields.push(<td key={key}>{moment(listItem[key]).format("DD-MM-YYYY")}</td>)
                 }
                 else {
-                    fields.push(<td key={listItem[key]}>{listItem[key]}</td>)
+                    fields.push(<td key={key}>{listItem[key]}</td>)
                 }
             }
         }
@@ -97,7 +97,6 @@ class List extends React.Component {
     componentDidMount() {
         let path = window.location.pathname;
         this.props.getListItems(path, this.state.param);
-
     }
 
     sortArray(keyValue) {
