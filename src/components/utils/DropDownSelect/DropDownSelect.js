@@ -8,7 +8,6 @@ export class DropDownSelect extends Component {
         super(props);
         this.state = {
             defaultValue: "None",
-            formType: "eyeglass",
             value: this.props.defaultValue || ''
         };
 

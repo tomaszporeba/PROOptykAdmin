@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
-import {reduxForm, Field, initialize} from 'redux-form';
+import {reduxForm, Field, initialize, getFormValues} from 'redux-form';
 import {connect} from "react-redux";
 import {getInvoice, getClients, getClient} from "../../actions";
 import {Link, withRouter} from 'react-router-dom';
@@ -15,46 +15,32 @@ import '../utils/formStyle.css';
 
 
 class InvoiceForm extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            showModal: false,
-            clients: [],
-            item: {}
-        };
-
-        this.handleCloseModal = this.handleCloseModal.bind(this);
-
-    }
-
-    handleOpenModal() {
-        this.setState({showModal: true});
-    }
-
-    handleCloseModal() {
-        this.props.getListItems('/client','');
-        this.setState({showModal: false});
-    }
 
     componentDidMount() {
-        this.props.getListItems('/client','');
-        let path = window.location.pathname.split('/');
-        this.props.getItem(`${path[1]}/${path[3]}`);
-        this.setState({item: this.props.singleItem});
-        this.props.initialize(this.state.item);
+        this.props.getListItems('/client', '');
+    }
+
+    async shouldComponentUpdate(nextProps, nextState) {
+        if (nextProps !== this.props) {
+            let path = window.location.pathname.split('/');
+            await this.props.getItem(`${path[1]}/${path[3]}`);
+            await initialize(nextProps.singleItem);
+            return true
+        } else return false
     }
 
     renderFields() {
         return _.map(formFields, ({label, name, type}) => {
             if (type === "select") {
-                return (<Field
+                return(<Field
                     name="clientId"
                     label="Client"
+                    formType="client"
                     defaultValue={this.props.initialValues.clientId}
                     component={DropDownSelect}
-                    handleOpenModal={() => this.handleOpenModal()}
                     options={this.props.listItems.map(client => {client.label = `${client.name} ${client.lastName}`; return client})}
                 />)
+
             } else {
                 return <Field
                     key={name}
@@ -81,8 +67,7 @@ class InvoiceForm extends Component {
                         <i className="material-icons right">done</i>
                     </button>
                 </form>
-                {<ModalHelper handleCloseModal={this.handleCloseModal} isOpen={this.state.showModal} formType={"client"} />}
-
+                <ModalHelper/>
             </div>
         );
     }
@@ -115,11 +100,18 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
+InvoiceForm = connect(
+    state => ({
+        values: getFormValues('examinationForm')(state),
+    })
+)(InvoiceForm);
 
 InvoiceForm = reduxForm({
     validate,
     form: 'invoiceForm',
-    destroyOnUnmount: false
+    destroyOnUnmount: false,
+    enableReinitialize: true
+
 })(InvoiceForm);
 
 InvoiceForm = connect(mapStateToProps, mapDispatchToProps)(withRouter(InvoiceForm));

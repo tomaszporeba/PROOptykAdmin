@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
-import {reduxForm, Field, initialize} from 'redux-form';
+import {reduxForm, Field, initialize, getFormValues} from 'redux-form';
 import {connect} from "react-redux";
 import {getClient} from "../../actions";
 import {Link, withRouter} from 'react-router-dom';
@@ -13,19 +13,17 @@ import {getSingleItem} from "../../creators/formCreator";
 import {setFormType} from "../../creators/formCreator";
 
 class ClientForm extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            eyeglasses: []
-        };
-
-    }
 
     componentDidMount() {
         this.props.getListItems('/eyeglass', '');
-        let path = window.location.pathname.split('/');
-        this.props.getItem(`${path[1]}/${path[3]}`);
-        this.props.initialize(this.props.singleItem);
+    }
+    async shouldComponentUpdate(nextProps, nextState) {
+        if (nextProps !== this.props) {
+            let path = window.location.pathname.split('/');
+            await this.props.getItem(`${path[1]}/${path[3]}`);
+            await initialize(nextProps.singleItem);
+            return true
+        } else return false
     }
 
     renderFields() {
@@ -102,17 +100,21 @@ function mapDispatchToProps(dispatch) {
         },
         getItem: (path) => {
             dispatch(getSingleItem(path))
-        },
-        setFormType: (formType) => {
-            dispatch(setFormType(formType))
         }
     }
 }
 
+ClientForm = connect(
+    state => ({
+        values: getFormValues('clientForm')(state),
+    })
+)(ClientForm);
+
 ClientForm = reduxForm({
     validate,
     form: 'clientForm',
-    destroyOnUnmount: false
+    destroyOnUnmount: false,
+    enableReinitialize: true
 })(ClientForm);
 
 ClientForm = connect(mapStateToProps, mapDispatchToProps)(withRouter(ClientForm));

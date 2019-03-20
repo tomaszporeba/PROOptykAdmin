@@ -92,7 +92,6 @@ EyeglassForm = reduxForm({
     validate,
     form: 'eyeglassForm',
     destroyOnUnmount: false,
-    // keepDirtyOnReinitialize: true,
     enableReinitialize: true
 })(EyeglassForm);
 

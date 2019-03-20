@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
-import {reduxForm, Field, initialize} from 'redux-form';
+import {reduxForm, Field, initialize, getFormValues} from 'redux-form';
 import {connect} from "react-redux";
 import {Link, withRouter} from 'react-router-dom';
 import InputField from "../utils/InputField";
@@ -13,18 +13,18 @@ import '../utils/formStyle.css';
 
 
 class ExaminationForm extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            clients: []
-        };
-    }
 
     componentDidMount() {
         this.props.getListItems('/client', '');
-        let path = window.location.pathname.split('/');
-        this.props.getItem(`${path[1]}/${path[3]}`);
-        this.props.initialize(this.props.singleItem);
+    }
+
+    async shouldComponentUpdate(nextProps, nextState) {
+        if (nextProps !== this.props) {
+            let path = window.location.pathname.split('/');
+            await this.props.getItem(`${path[1]}/${path[3]}`);
+            await initialize(nextProps.singleItem);
+            return true
+        } else return false
     }
 
     renderFields() {
@@ -100,17 +100,22 @@ function mapDispatchToProps(dispatch) {
         },
         getItem: (path) => {
             dispatch(getSingleItem(path))
-        },
-        setFormType: (formType) => {
-            dispatch(setFormType(formType))
         }
     }
 }
 
+ExaminationForm = connect(
+    state => ({
+        values: getFormValues('examinationForm')(state),
+    })
+)(ExaminationForm);
+
 ExaminationForm = reduxForm({
     validate,
     form: 'examinationForm',
-    destroyOnUnmount: false
+    destroyOnUnmount: false,
+    enableReinitialize: true
+
 })(ExaminationForm);
 
 ExaminationForm = connect(mapStateToProps, mapDispatchToProps)(withRouter(ExaminationForm));
