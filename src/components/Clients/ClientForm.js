@@ -11,6 +11,7 @@ import ModalHelper from "../utils/Modal/ModalHelper";
 import {getListOfItems} from "../../creators/listCreator";
 import {getSingleItem} from "../../creators/formCreator";
 import {setFormType} from "../../creators/formCreator";
+import moment from "moment/moment";
 
 class ClientForm extends Component {
 
@@ -21,7 +22,8 @@ class ClientForm extends Component {
         if (nextProps !== this.props) {
             let path = window.location.pathname.split('/');
             await this.props.getItem(`${path[1]}/${path[3]}`);
-            await initialize(nextProps.singleItem);
+            let singleItem = nextProps.values;
+            await initialize(singleItem);
             return true
         } else return false
     }
