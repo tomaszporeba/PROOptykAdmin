@@ -15,9 +15,11 @@ class EyeglassNew extends Component{
     renderContent() {
         if (this.state.showFormReview) {
             return <EyeglassReview handleModalSubmit={() =>  this.handleModal()} onCancel={() => this.setState({ showFormReview: false })}/>;
+        } else {
+            return <EyeglassForm onEyeglassSubmit={() => this.setState({ showFormReview: true })}/>;
+
         }
 
-        return <EyeglassForm onEyeglassSubmit={() => this.setState({ showFormReview: true })}/>;
     }
 
     render() {
@@ -29,8 +31,4 @@ class EyeglassNew extends Component{
     }
 }
 
-export default reduxForm(
-    {
-        form: 'eyeglassForm'
-    }
-)(EyeglassNew);
+export default EyeglassNew

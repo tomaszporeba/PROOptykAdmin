@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
-import {reduxForm, Field, initialize} from 'redux-form';
+import {reduxForm, Field, initialize, getFormValues} from 'redux-form';
 import {connect} from "react-redux";
 import {getEyeglass} from "../../actions";
 import {Link, withRouter} from 'react-router-dom';
@@ -12,11 +12,14 @@ import '../utils/formStyle.css';
 
 class EyeglassForm extends Component {
 
+    async shouldComponentUpdate(nextProps, nextState) {
+        if (nextProps !== this.props) {
+            let path = window.location.pathname.split('/');
+            await this.props.getItem(`${path[1]}/${path[3]}`);
+            await initialize(nextProps.singleItem);
+            return true
+        } else return false
 
-    componentDidMount() {
-        let path = window.location.pathname.split('/');
-        this.props.getItem(`${path[1]}/${path[3]}`);
-        this.props.initialize(this.props.singleItem);
     }
 
     renderFields() {
@@ -65,10 +68,12 @@ function validate(values) {
 }
 
 const mapStateToProps= (state) => {
-    return {listItems: state.list.listItems,
+    return {
+        listItems: state.list.listItems,
         initialValues: state.formInput.singleItem,
         isLoading: state.list.isLoading}
 } ;
+
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -77,10 +82,18 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
+EyeglassForm = connect(
+    state => ({
+        values: getFormValues('eyeglassForm')(state),
+    })
+)(EyeglassForm);
+
 EyeglassForm = reduxForm({
     validate,
     form: 'eyeglassForm',
-    destroyOnUnmount: false
+    destroyOnUnmount: false,
+    // keepDirtyOnReinitialize: true,
+    enableReinitialize: true
 })(EyeglassForm);
 
 EyeglassForm = connect(mapStateToProps, mapDispatchToProps)(withRouter(EyeglassForm));
