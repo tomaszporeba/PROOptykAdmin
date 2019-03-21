@@ -1,6 +1,7 @@
 .form-content {
     display: flex;
     background-color: rgb(38, 38, 38);
+    width: 90%;
 }
 
 .form-container {
@@ -18,4 +19,10 @@
 
 .review-field-container{
     color: white;
+}
+
+@media screen and (min-width: 700px){
+    .form-content {
+        max-width: 500px;
+    }
 }

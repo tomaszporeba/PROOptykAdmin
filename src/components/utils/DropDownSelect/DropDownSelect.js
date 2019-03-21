@@ -40,7 +40,7 @@ export class DropDownSelect extends Component {
         this.setState({value: event.target.value})
     };
     render() {
-        const {input, options, label, meta : { error, touched }} = this.props;
+        const {input, options, label, formType, meta : { error, touched }} = this.props;
         if (options) {
             return (
                 <div style={{marginBottom: "2.25rem"}}>
@@ -48,7 +48,7 @@ export class DropDownSelect extends Component {
                     <select {...input} className="browser-default" value={this.state.value} onChange={this.onChange} onClick={this.createClient}>
                         <option value="" disabled selected hidden>None</option>
                         <optgroup label="Add">
-                            <option value={0}>Add client</option>
+                            <option value={0}>{`Add ${formType}`}</option>
                         </optgroup>
                         <optgroup label="Choose">
                             {options.map(this.renderSelectOptions)}
