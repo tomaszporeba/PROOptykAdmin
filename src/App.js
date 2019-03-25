@@ -14,6 +14,7 @@ import ClientNew from "./components/Clients/ClientNew";
 import InvoiceNew from "./components/Invoices/InvoiceNew";
 import ExaminationNew from "./components/Examination/ExaminationNew";
 import * as headers from "./consts/headers"
+import ModalHelper from "./components/utils/Modal/ModalHelper";
 
 
 class App extends Component {
@@ -52,6 +53,7 @@ class App extends Component {
                         <PrivateRoute exact path="/client/new" component={ClientNew}/>
                         <PrivateRoute exact path="/examination/edit/:id" component={ExaminationNew}/>
                         <PrivateRoute exact path="/examination/new" component={ExaminationNew}/>
+                        <ModalHelper/>
                     </div>
 
                 </div>

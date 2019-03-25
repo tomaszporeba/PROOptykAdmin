@@ -38,7 +38,10 @@ class InvoiceForm extends Component {
                     formType="client"
                     defaultValue={this.props.initialValues.clientId}
                     component={DropDownSelect}
-                    options={this.props.listItems.map(client => {client.label = `${client.name} ${client.lastName}`; return client})}
+                    options={this.props.listItems.map(client => {
+                        client.label = `${client.name} ${client.lastName}`;
+                        return client
+                    })}
                 />)
 
             } else {
@@ -67,7 +70,6 @@ class InvoiceForm extends Component {
                         <i className="material-icons right">done</i>
                     </button>
                 </form>
-                <ModalHelper/>
             </div>
         );
     }

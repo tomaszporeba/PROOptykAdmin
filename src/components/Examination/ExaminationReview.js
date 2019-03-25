@@ -4,13 +4,14 @@ import formFields from './formFields';
 import _ from 'lodash';
 import { withRouter } from 'react-router-dom';
 import {saveExamination} from "../../actions";
+import {closeModal} from "../../creators/modalCreator";
 
 class ExaminationReview extends Component {
 
     handleSubmit = async () => {
         await this.props.saveExamination(this.props.formValues);
         if (this.props.isModal) {
-            this.props.handleModalSubmit()
+            this.props.closeModal()
 
         } else {
             this.props.history.push("/examination")
@@ -45,7 +46,18 @@ function mapStateToProps(state) {
     return {
         formValues: state.form.examinationForm.values
     };
-
 }
 
-export default connect(mapStateToProps, {saveExamination})(withRouter(ExaminationReview));
+
+function mapDispatchToProps(dispatch) {
+    return {
+        closeModal: () => {
+            dispatch(closeModal())
+        },
+        saveExamination: (values) => {
+            dispatch(saveExamination(values))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ExaminationReview));

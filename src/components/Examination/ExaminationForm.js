@@ -67,7 +67,6 @@ class ExaminationForm extends Component {
                         <i className="material-icons right">done</i>
                     </button>
                 </form>
-                <ModalHelper/>
             </div>
         );
     }

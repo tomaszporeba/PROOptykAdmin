@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import formFields from './formFields';
 import _ from 'lodash';
 import { withRouter } from 'react-router-dom';
-import {saveEyeglass} from "../../actions";
+import {saveEyeglass, saveInvoice} from "../../actions";
+import {closeModal} from "../../creators/modalCreator";
 
 class EyeglassReview extends Component {
 
@@ -11,7 +12,7 @@ class EyeglassReview extends Component {
     handleSubmit = async () => {
         await this.props.saveEyeglass(this.props.formValues);
         if (this.props.isModal) {
-            this.props.handleModalSubmit()
+            this.props.closeModal()
 
         } else {
             this.props.history.push("/eyeglass")
@@ -30,6 +31,7 @@ class EyeglassReview extends Component {
     });
 
     render() {
+        console.log(this.props);
         return (
             <div className="form-container">
                 <h4>Please confirm your  entries</h4>
@@ -47,7 +49,18 @@ function mapStateToProps(state) {
         formValues: state.form.eyeglassForm.values,
         isModal: state.modal.isModalOpen
     };
-    
 }
 
-export default connect(mapStateToProps, {saveEyeglass})(withRouter(EyeglassReview));
+
+function mapDispatchToProps(dispatch) {
+    return {
+        closeModal: () => {
+            dispatch(closeModal())
+        },
+        saveEyeglass: (values) => {
+        dispatch(saveEyeglass(values))
+    }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(EyeglassReview));

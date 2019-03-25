@@ -4,6 +4,7 @@ import formFields from './formFields';
 import _ from 'lodash';
 import { withRouter } from 'react-router-dom';
 import {saveInvoice} from "../../actions";
+import {closeModal} from "../../creators/modalCreator";
 
 
 
@@ -14,7 +15,7 @@ class InvoiceReview extends Component {
     handleSubmit = async () => {
         await this.props.saveInvoice(this.props.formValues);
         if (this.props.isModal) {
-            this.props.handleModalSubmit()
+            this.props.closeModal()
 
         } else {
             this.props.history.push("/invoice")
@@ -49,7 +50,18 @@ function mapStateToProps(state) {
     return {
         formValues: state.form.invoiceForm.values
     };
-    
 }
 
-export default connect(mapStateToProps, {saveInvoice})(withRouter(InvoiceReview));
+
+function mapDispatchToProps(dispatch) {
+    return {
+        closeModal: () => {
+            dispatch(closeModal())
+        },
+        saveInvoice: (values) => {
+            dispatch(saveInvoice(values))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(InvoiceReview));
