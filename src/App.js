@@ -19,7 +19,7 @@ import * as headers from "./consts/headers"
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {sidebarOpen: false};
+        this.state = {sidebarOpen: false, sidebarA: true};
     }
 
     handleViewSidebar = () => {
